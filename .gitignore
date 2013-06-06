@@ -1,0 +1,13 @@
+# Ignore build files,
+build
+project.xcworkspace
+# Ignore project files (xcode related)
+.mode1v3
+.pbxuser
+.xcuserstate
+.xcworkspace
+xcuserdata
+
+# Ignore .svn files
+.svn
+.DS_Store
