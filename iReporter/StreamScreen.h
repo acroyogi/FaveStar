@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoView.h"
 
-@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate> {
+@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     IBOutlet UIBarButtonItem* btnCompose;
     IBOutlet UIBarButtonItem* btnRefresh;
     IBOutlet UIScrollView* listView;
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSArray *streamList;
 
 //refresh the photo stream
--(IBAction)btnRefreshTapped;
+- (IBAction)btnRefreshTapped;
 - (IBAction)showCameraView;
 
 @end

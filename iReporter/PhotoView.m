@@ -46,7 +46,8 @@
         caption.textColor = [UIColor whiteColor];
         caption.textAlignment = UITextAlignmentLeft;
         caption.font = [UIFont systemFontOfSize:12];
-        caption.text = [NSString stringWithFormat:@" %@ : %@ : +%@", [data objectForKey:@"CAT_ID"], [data objectForKey:@"title"], [data objectForKey:@"username"]];
+        caption.text = [NSString stringWithFormat:@"       %@ : +%@", [data objectForKey:@"title"], [data objectForKey:@"username"]];
+        //caption.text = [NSString stringWithFormat:@" %@ : %@ : +%@", [data objectForKey:@"CAT_ID"], [data objectForKey:@"title"], [data objectForKey:@"username"]];
         // caption.text = [NSString stringWithFormat:@" %@ : +%@", [data objectForKey:@"title"], [data objectForKey:@"username"]];
         // caption.text = [NSString stringWithFormat:@" %@ : @%@",[data objectForKey:@"username"]];
         [self addSubview: caption];
@@ -60,6 +61,7 @@
         // load the thumbnail
         int IdPhoto = [[data objectForKey:@"IdPhoto"] intValue];
 		NSURL* imageURL = [api urlForImageWithId:[NSNumber numberWithInt: IdPhoto] isThumb:YES];
+        
 		AFImageRequestOperation* imageOperation = [AFImageRequestOperation imageRequestOperationWithRequest: [NSURLRequest requestWithURL:imageURL] success:^(UIImage *image) {
 			//create an image view, add it to the view
 			UIImageView* thumbView = [[UIImageView alloc] initWithImage: image];
@@ -68,10 +70,21 @@
             thumbView.clipsToBounds = YES;
 			[self insertSubview: thumbView belowSubview: caption];
 		}];
-
+        
+        NSURL* catImageURL = [api urlForCatWithId:[data objectForKey:@"CAT_ID"]];
+        
+		AFImageRequestOperation* catImageOperation = [AFImageRequestOperation imageRequestOperationWithRequest: [NSURLRequest requestWithURL:catImageURL] success:^(UIImage *image) {
+			//create an image view, add it to the view
+			UIImageView* catImageView = [[UIImageView alloc] initWithImage: image];
+            catImageView.frame = CGRectMake(3,kThumbSideH-20,18,18);
+            catImageView.contentMode = UIViewContentModeScaleAspectFill;
+            catImageView.clipsToBounds = YES;
+			[self insertSubview: catImageView aboveSubview:caption];
+		}];
 
         NSOperationQueue* queue = [[NSOperationQueue alloc] init];
 		[queue addOperation:imageOperation];
+        [queue addOperation:catImageOperation];
     }
     return self;
 }

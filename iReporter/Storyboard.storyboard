@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qVx-xu-zIz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qVx-xu-zIz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -43,7 +43,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="237" y="-752"/>
+            <point key="canvasLocation" x="-203" y="-1252"/>
         </scene>
         <!--Photo Screen-->
         <scene sceneID="srR-4F-vFO">
@@ -130,7 +130,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="1020" y="-752"/>
+            <point key="canvasLocation" x="644" y="-1272"/>
         </scene>
         <!--Stream Photo Screen-->
         <scene sceneID="2GX-G2-zqW">
@@ -140,11 +140,13 @@
                         <rect key="frame" x="0.0" y="64" width="480" height="256"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="rEh-bK-FVk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="143-Oi-WF9">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </imageView>
+                                <connections>
+                                    <outlet property="delegate" destination="LbA-iv-5eH" id="Goi-0y-GAw"/>
+                                </connections>
+                            </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fade256.png" id="5Da-Dj-KHA">
                                 <rect key="frame" x="0.0" y="194" width="360" height="62"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -195,7 +197,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                         <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -206,12 +208,12 @@
                     <connections>
                         <outlet property="catIconView" destination="8L2-iN-ZUg" id="N3B-qg-Jko"/>
                         <outlet property="lblTitle" destination="CQp-O9-Cda" id="kgD-3s-g4e"/>
-                        <outlet property="photoView" destination="rEh-bK-FVk" id="vWC-p6-nJh"/>
+                        <outlet property="scrollView" destination="143-Oi-WF9" id="w9h-jL-6Vq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1h1-Ot-n9W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="589" y="769"/>
+            <point key="canvasLocation" x="-244" y="-620"/>
         </scene>
         <!--Login Screen-->
         <scene sceneID="fBJ-kQ-iIn">
@@ -235,7 +237,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LMh-NU-ZOG">
                                 <rect key="frame" x="92" y="86" width="150" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <state key="normal" title="Login" backgroundImage="greenButtonActivated@2x.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -250,7 +252,7 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ujh-IN-IoQ">
                                 <rect key="frame" x="255" y="86" width="150" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <state key="normal" title="Register" backgroundImage="aquaButtonActivated@2x.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -291,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvp-V0-APV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1273" y="568"/>
+            <point key="canvasLocation" x="1653" y="-932"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m0L-uG-mke">
@@ -310,7 +312,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="So2-hc-tgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-403" y="-192"/>
+            <point key="canvasLocation" x="-801" y="-1252"/>
         </scene>
         <!--Cat Screen-->
         <scene sceneID="LHb-5x-Vge">
@@ -329,126 +331,6 @@
                                 <rect key="frame" x="150" y="56" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oKn-b2-USr">
-                                <rect key="frame" x="60" y="69" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1000-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatPersonTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="TKo-tE-QIU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VP4-Mi-1he">
-                                <rect key="frame" x="138" y="69" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1001-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatPlaceTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="XDo-wO-3hP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mOa-Rp-pjq">
-                                <rect key="frame" x="216" y="69" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1002-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatThingTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="DyO-lR-qia"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jrC-aT-DZG">
-                                <rect key="frame" x="338" y="147" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1007-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatIdeaTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="yhr-R8-fwT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="x0V-kO-ttc">
-                                <rect key="frame" x="295" y="69" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1003-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatEventTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="Y3W-1i-BhY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="j6r-zx-PGC">
-                                <rect key="frame" x="101" y="146" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1004-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatMealTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="FgR-2B-v6m"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7rK-6L-J3t">
-                                <rect key="frame" x="180" y="147" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1005-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatSongTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="0JA-xX-asi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NHt-rb-AmW">
-                                <rect key="frame" x="260" y="146" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="fave-cat-1006-512.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnCatQuoteTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="woq-j9-K6F"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="bottomLeft" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="fyM-CO-CjE">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -467,6 +349,160 @@
                                     <outlet property="delegate" destination="5CV-o0-inp" id="ern-ER-k1S"/>
                                 </connections>
                             </textField>
+                            <view contentMode="scaleToFill" id="gb7-DI-SJt">
+                                <rect key="frame" x="46" y="48" width="388" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oKn-b2-USr">
+                                        <rect key="frame" x="0.0" y="20" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1000-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatPersonTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="TKo-tE-QIU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VP4-Mi-1he">
+                                        <rect key="frame" x="84" y="20" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1001-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatPlaceTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="XDo-wO-3hP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mOa-Rp-pjq">
+                                        <rect key="frame" x="170" y="20" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1002-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatThingTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="DyO-lR-qia"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="x0V-kO-ttc">
+                                        <rect key="frame" x="253" y="20" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1003-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatEventTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="Y3W-1i-BhY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="j6r-zx-PGC">
+                                        <rect key="frame" x="44" y="91" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1004-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatMealTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="FgR-2B-v6m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7rK-6L-J3t">
+                                        <rect key="frame" x="132" y="91" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1005-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatSongTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="0JA-xX-asi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NHt-rb-AmW">
+                                        <rect key="frame" x="220" y="91" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1006-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatQuoteTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="woq-j9-K6F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jrC-aT-DZG">
+                                        <rect key="frame" x="308" y="91" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="fave-cat-1007-512.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCatIdeaTapped:" destination="5CV-o0-inp" eventType="touchUpInside" id="yhr-R8-fwT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" id="YRw-eH-HXd">
+                                <rect key="frame" x="0.0" y="226" width="480" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="bottomLeft" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="rIM-A7-O6D">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.42999999999999999" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="21"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RVL-js-4QW">
+                                        <rect key="frame" x="36" y="0.0" width="678" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="EPY-Jt-bTW">
+                                        <rect key="frame" x="11" y="5" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -480,8 +516,9 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="btnAction" destination="RpD-Dl-QEf" id="wcv-O5-iq1"/>
-                        <outlet property="btnCamera" destination="zey-Dz-9OB" id="aaL-Me-3rU"/>
                         <outlet property="fldTitle" destination="Hcq-1J-ilo" id="B1z-Ay-rUt"/>
+                        <outlet property="messageLabel" destination="RVL-js-4QW" id="qKW-nG-aIz"/>
+                        <outlet property="messageView" destination="YRw-eH-HXd" id="h8T-tC-cgX"/>
                         <outlet property="photo" destination="Bba-Nb-7Zf" id="SCH-0t-F9o"/>
                         <segue destination="Tap-8t-COH" kind="modal" identifier="ShowLogin" id="TYX-qq-5fM"/>
                     </connections>
@@ -500,7 +537,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="965" y="-150"/>
+            <point key="canvasLocation" x="653" y="-606"/>
         </scene>
     </scenes>
     <resources>
@@ -526,7 +563,6 @@
         <class className="CatScreen" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CatScreen.h"/>
             <relationships>
-                <relationship kind="action" name="btnActionTapped:"/>
                 <relationship kind="action" name="btnCameraTapped:"/>
                 <relationship kind="action" name="btnCatEventTapped:"/>
                 <relationship kind="action" name="btnCatIdeaTapped:"/>
@@ -538,6 +574,8 @@
                 <relationship kind="action" name="btnCatThingTapped:"/>
                 <relationship kind="outlet" name="btnCamera" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="fldTitle" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="photo" candidateClass="UIImageView"/>
             </relationships>
         </class>
@@ -567,6 +605,7 @@
                 <relationship kind="outlet" name="catIconView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="StreamScreen" superclassName="UIViewController">
@@ -586,7 +625,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gNo-A0-RN4"/>
-        <segue reference="TYX-qq-5fM"/>
+        <segue reference="h1n-sa-8IU"/>
+        <segue reference="jvh-ga-FuF"/>
     </inferredMetricsTieBreakers>
 </document>

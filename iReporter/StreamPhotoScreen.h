@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
 
-@interface StreamPhotoScreen : UIViewController
+@interface StreamPhotoScreen : UIViewController<UIScrollViewDelegate>
 {
     //just the photo view and the photo title
     IBOutlet UIImageView* photoView;
     IBOutlet UIImageView* catIconView;
     IBOutlet UILabel* lblTitle;
+    
+    IBOutlet UIScrollView *scrollView;
     
     int totalPhotoCount;
     int currentImageId;

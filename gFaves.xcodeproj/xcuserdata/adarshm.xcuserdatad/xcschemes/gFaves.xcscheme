@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9C21AF1114E4579F00DB003E"
-               BuildableName = "FaveStar.app"
+               BuildableName = "FaveTube.app"
                BlueprintName = "gFaves"
                ReferencedContainer = "container:gFaves.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9C21AF1114E4579F00DB003E"
-            BuildableName = "FaveStar.app"
+            BuildableName = "FaveTube.app"
             BlueprintName = "gFaves"
             ReferencedContainer = "container:gFaves.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9C21AF1114E4579F00DB003E"
-            BuildableName = "FaveStar.app"
+            BuildableName = "FaveTube.app"
             BlueprintName = "gFaves"
             ReferencedContainer = "container:gFaves.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9C21AF1114E4579F00DB003E"
-            BuildableName = "FaveStar.app"
+            BuildableName = "FaveTube.app"
             BlueprintName = "gFaves"
             ReferencedContainer = "container:gFaves.xcodeproj">
          </BuildableReference>

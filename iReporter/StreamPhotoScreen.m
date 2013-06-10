@@ -27,50 +27,25 @@
 	[super viewDidLoad];
     loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(60, 160, 200, 80)];
     [self hideLoadingView];
-
-    [self loadVewWithData];
-    
-    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
-    [rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.view addGestureRecognizer:rightSwipe];
-    
-    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
-    [leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [self.view addGestureRecognizer:leftSwipe];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    [self showLoadingView];
-}
-
-- (void)swipeRecognizer:(UISwipeGestureRecognizer *)sender {
     
-    int imageId = self.currentImageId;
-    
-    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
-        imageId = (imageId > 0) ? (imageId  - 1) : 0;
-    }
-    else if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-        imageId = (imageId < (self.totalPhotoCount - 2)) ? (imageId  + 1) : (self.totalPhotoCount - 1);
-    }
-    if(imageId != self.currentImageId) {
-        self.currentImageId = imageId;
-        [self loadVewWithData];
-    }
+    [self loadScrollViewWithImages];
+    [self setInitialPage];
+    [self loadVewWithData];
 }
 
 - (void)loadVewWithData {
 
-//    [self showLoadingView];
     NSDictionary *data = [self.dataList objectAtIndex:self.currentImageId];
 
     self.IdPhoto = [NSNumber numberWithInt:[[data objectForKey:@"IdPhoto"] intValue]];
-    
-    //lblTitle.text = [data objectForKey:@"title"];
-    
+    lblTitle.text = [data objectForKey:@"title"];
+
+    /*
 	//load the caption of the selected photo
 	[[API sharedInstance] commandWithParams:[NSMutableDictionary
                             dictionaryWithObjectsAndKeys:
@@ -85,49 +60,49 @@
                   lblTitle.text = [photo objectForKey:@"title"];
               }
      ];
-    
-	//load the big size photo
-	NSURL* imageURL = [[API sharedInstance] urlForImageWithId:self.IdPhoto isThumb:NO];
-	[photoView setImageWithURL: imageURL];
-    
+     */
+
     NSURL* catURL = [[API sharedInstance] urlForCatWithId:[data objectForKey:@"CAT_ID"]];
     [catIconView setImageWithURL: catURL];
 }
 
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationLandscapeRight;
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        return YES;
+- (void)loadScrollViewWithImages {
+    
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * dataList.count, self.view.frame.size.height);
+    scrollView.pagingEnabled = YES;
+    
+    CGFloat xPos = 0.0;
+    
+    for (NSDictionary *imageDetails in self.dataList) {
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [scrollView addSubview:imageView];
+        xPos += self.view.frame.size.width;
+        
+        NSURL* imageURL = [[API sharedInstance] urlForImageWithId:[NSNumber numberWithInt:[[imageDetails objectForKey:@"IdPhoto"] intValue]] isThumb:NO];
+        [imageView setImageWithURL: imageURL];
     }
-    return NO;
+
 }
 
-/*
-- (BOOL)shouldAutorotate {
-    return YES;
+- (void)setInitialPage {
+    [scrollView setContentOffset:CGPointMake(scrollView.frame.size.width * self.currentImageId, 0.0f) animated:YES];
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape; // etc
-}
+#pragma mark - UIScrollView delegate method
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        return YES;
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    
+    // Update the page when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    
+    if(page != self.currentImageId) {
+        self.currentImageId = page;
+        [self loadVewWithData];
     }
-    return NO;
 }
- */
 
 - (void)showLoadingView {
     
@@ -147,6 +122,22 @@
 
 - (IBAction)closeView:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationLandscapeRight;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

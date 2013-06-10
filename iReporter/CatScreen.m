@@ -10,6 +10,7 @@
 #import "API.h"
 #import "UIImage+Resize.h"
 #import "UIAlertView+error.h"
+#import "Utility.h"
 
 NSString *gXdataType = @"gperson";
 
@@ -45,8 +46,6 @@ NSString *gXdataType = @"gperson";
     
     [super viewDidLoad];
     [self updateViewWithDetails];
-    loadingView = [[LoadingView alloc] initWithFrame:CGRectMake(60, 160, 200, 80)];
-    loadingView.center = self.view.center;
     
     if(self.favImageName == nil) {
         [self hideCategoryButtons];
@@ -94,19 +93,6 @@ NSString *gXdataType = @"gperson";
         [fldTitle becomeFirstResponder];
     }
 }
-/*
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait; 
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        return YES;
-    }
-    return NO;
-}
- */
 
 - (void)updateViewWithDetails {
     
@@ -196,9 +182,6 @@ NSString *gXdataType = @"gperson";
     [self uploadTrick];
 }
 
-
-
-
 -(IBAction)btnActionTapped:(id)sender {
     
     [self selectCategoryButton:sender];
@@ -223,6 +206,7 @@ NSString *gXdataType = @"gperson";
 }
 
 -(void)takePhoto {
+    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
 #if TARGET_IPHONE_SIMULATOR
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -236,6 +220,7 @@ NSString *gXdataType = @"gperson";
 }
 
 -(void)effects {
+    
     //apply sepia filter - taken from the Beginning Core Image from iOS5 by Tutorials
     CIImage *beginImage = [CIImage imageWithData: UIImagePNGRepresentation(photo.image)];
     CIContext *context = [CIContext contextWithOptions:nil];
@@ -245,9 +230,6 @@ NSString *gXdataType = @"gperson";
     photo.image = [UIImage imageWithCGImage:cgimg];
     CGImageRelease(cgimg);
 }
-
-
-
 
 // the next three functions are specific types of fave uploads
 // literally the only diggerence is the @command to the API in the third line
@@ -304,11 +286,9 @@ NSString *gXdataType = @"gperson";
 
 -(void)uploadTrick {
     
-   // [self showLoadingView];
-    //upload the image and the title to the web service
-    
     fldTitle.enabled = NO;
     
+    //upload the image and the title to the web service
     [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                              dictionaryWithObjectsAndKeys:
                                              gXdataType, @"command",
@@ -318,7 +298,7 @@ NSString *gXdataType = @"gperson";
                                              self.favImageName, @"title",
                                              
                                              nil]
-                               onCompletion:^(NSDictionary *json) { 
+                               onCompletion:^(NSDictionary *json) {
                                    
                                    //completion
                                    if (![json objectForKey:@"error"]) {
@@ -336,12 +316,13 @@ NSString *gXdataType = @"gperson";
                                    }
                                    fldTitle.enabled = YES;
                                    fldTitle.text = self.favImageName;
-                               //    [self hideLoadingView];
+                                   [self hideMessageView];
                                }];
-     
+    
 }
 
 -(void)logout {
+    
 	//logout the user from the server, and also upon success destroy the local authorization
 	[[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"logout", @"command", nil] onCompletion:^(NSDictionary *json) {
 	   //logged out from server
@@ -351,6 +332,7 @@ NSString *gXdataType = @"gperson";
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     switch (buttonIndex) {
         case 0:
             [self uploadPerson];
@@ -380,8 +362,7 @@ NSString *gXdataType = @"gperson";
 }
 
 #pragma mark - Image picker delegate methods
--(void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info {
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
 	UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
@@ -415,98 +396,61 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissModalViewControllerAnimated:NO];
 }
 
-- (void)showLoadingView {
-    
-    if(loadingView != nil) {
-        [self hideLoadingView];        
-        loadingView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
-        [self.view performSelectorOnMainThread:@selector(addSubview:) withObject:loadingView waitUntilDone:NO];
-    }
-}
-
-- (void)hideLoadingView {
-    
-    if(loadingView != nil) {
-        [loadingView performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-    }
-}
-
 - (void)selectCategoryButton:(id)sender {
     
     UIButton *btn = (UIButton*)sender;
     
     int i = 1000;
-    for (; i < 1008; i++) {
+    int limit = 1000 + TotalNoOfcategories;
+    
+    for (; i < limit; i++) {
         
         UIButton *catButton = (UIButton *)[self.view viewWithTag:i];
         NSString *imageName = [NSString stringWithFormat:@"fave-cat-%d%@-512.png", i, (catButton.tag == btn.tag) ?  @"": @"-50g"];
-        [[self class] setButtonImageForAllState:catButton image:imageName];
+        [Utility setButtonImageForAllState:catButton image:imageName];
+        
+        if((catButton.tag != btn.tag)) {
+            [Utility animateViewWithAlpha:0.0 duration:4 view:catButton];
+        }
     }
     
 }
 
-+ (void)setButtonImageForAllState:(UIButton*)btn image:(NSString*)imageName {
-    
-    [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:2];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateHighlighted];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateSelected];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateDisabled];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateApplication];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateReserved];
-	[UIView commitAnimations];
-}
-
-+ (void)animateViewWithAlpha:(float)alpha duration:(float)duration view:(id)view {
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:duration];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[view setAlpha:alpha];
-	[UIView commitAnimations];
-}
-
 - (void)updateInstructionText:(NSString*)category {
     
-    fldTitle.text = [NSString stringWithFormat:@"Saving %@ to your FaveFeed...", category];
+    messageView.alpha = 0;
+    [Utility animateViewWithAlpha:1 duration:1 view:messageView];
+    messageLabel.text = [NSString stringWithFormat:@"Saving %@ to your FaveFeed...", [category lowercaseString]];
 }
 
+- (void)hideMessageView {
+    
+    [Utility animateViewWithAlpha:0 duration:1 view:messageView];
+}
 
 - (void)hideCategoryButtons {
     
     [self showOrHideCategoryButtons:NO];
-//    int i = 1000;
-//    for (; i < 1008; i++) {
-//        
-//        UIButton *catButton = (UIButton *)[self.view viewWithTag:i];
-//        catButton.alpha = 0.0;
-//    }
 }
 
 - (void)showCategoryButtons {
     
     [self showOrHideCategoryButtons:YES];
-    
-//    int i = 1000;
-//    for (; i < 1008; i++) {
-//        
-//        UIButton *catButton = (UIButton *)[self.view viewWithTag:i];
-////        catButton.alpha = 1.0;
-//        [[self class] animateViewWithAlpha:1.0 duration:1 view:catButton];
-//    }
 }
 
 - (void)showOrHideCategoryButtons:(BOOL)isShow {
     
     int i = 1000;
-    for (; i < 1008; i++) {
+    int limit = 1000 + TotalNoOfcategories;
+    
+    for (; i < limit; i++) {
         
         UIButton *catButton = (UIButton *)[self.view viewWithTag:i];
-        [[self class] animateViewWithAlpha:((isShow == YES) ? 1.0 : 0.0) duration:((isShow == YES) ? 1.0 : 0.0) view:catButton];
+        [Utility animateViewWithAlpha:((isShow == YES) ? 1.0 : 0.0) duration:((isShow == YES) ? 1.0 : 0.0) view:catButton];
     }
 }
+
+#pragma mark - UITextField delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     

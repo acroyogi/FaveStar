@@ -40,30 +40,6 @@
 	[self refreshStream];
 }
 
-
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationLandscapeRight;
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        return YES;
-    }
-    return NO;
-}
- 
-
-
-//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-//    [self showStream:self.streamList];
-//}
-
 -(IBAction)btnRefreshTapped {
     
 	[self refreshStream];
@@ -106,16 +82,15 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([@"ShowPhoto" compare: segue.identifier]==NSOrderedSame) {
+    if ([@"ShowPhoto" compare: segue.identifier] == NSOrderedSame) {
+        
         StreamPhotoScreen* streamPhotoScreen = segue.destinationViewController;
-        
-        
-//        streamPhotoScreen.IdPhoto = sender;
         streamPhotoScreen.currentImageId = [sender intValue];
         streamPhotoScreen.totalPhotoCount = self.totalStreamCount;
         streamPhotoScreen.dataList = self.streamList;
     }
     else if ([@"ShowCategory" compare: segue.identifier] == NSOrderedSame) {
+        
         CatScreen *catScreen = segue.destinationViewController;
         catScreen.favImage = self.favImage;
         catScreen.favImageName = self.favName;
@@ -143,52 +118,29 @@
         UIImageWriteToSavedPhotosAlbum([info objectForKey:UIImagePickerControllerOriginalImage], nil, nil, nil);
     }
     
-    /*
-    inputAlert = [[UIAlertView alloc] initWithTitle:@""
-                                                      message:@"Name this fave.."
-                                                     delegate:nil
-                                            cancelButtonTitle:nil
-                                            otherButtonTitles:nil];
-    [inputAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    UITextField * alertTextField = [inputAlert textFieldAtIndex:0];
-    alertTextField.keyboardType = UIKeyboardTypeDefault;
-    [alertTextField setDelegate:self];
-    [inputAlert show];
-     */
     [imagePicker dismissModalViewControllerAnimated:YES];
     [self performSegueWithIdentifier:@"ShowCategory" sender:nil];
-
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
     self.favImage = nil;
     [picker dismissModalViewControllerAnimated:YES];
 }
 
-/*
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
-    if(buttonIndex == 1) {
-        UITextField *textField = ((UITextField*)[alertView textFieldAtIndex:0] != nil) ? (UITextField*)[alertView textFieldAtIndex:0] : nil;
-        self.favName = (textField != nil) ? textField.text : @"";
-        [self performSegueWithIdentifier:@"ShowCategory" sender:nil];
-    }
-
-    [imagePicker dismissModalViewControllerAnimated:YES];
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationLandscapeRight;
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
-    [textField resignFirstResponder];
-    self.favName = (textField != nil) ? textField.text : @"";
-    [self performSegueWithIdentifier:@"ShowCategory" sender:nil];
-    [inputAlert dismissWithClickedButtonIndex:1 animated:YES];
-    [imagePicker dismissModalViewControllerAnimated:YES];
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        return YES;
+    }
+    return NO;
 }
-*/
 
 @end

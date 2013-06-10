@@ -96,9 +96,7 @@
 }
 
 // this function creates the URL for a category icon from the server
-
 -(NSURL*)urlForCatWithId:(NSString*)IdCat {
-    // NSString* urlString = [NSString stringWithFormat:@"%@%@.png", kAPIIconImgPath, IdCat];
     NSString* urlString = [NSString stringWithFormat:@"%@%@.png", kAPIIconImgPath, IdCat];
     return [NSURL URLWithString:urlString];
 }

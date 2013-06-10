@@ -7,17 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoadingView.h"
+
+#define TotalNoOfcategories 8
 
 @interface CatScreen : UIViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 {
     IBOutlet UIImageView* photo;
     IBOutlet UIBarButtonItem* btnCamera;
     IBOutlet UITextField* fldTitle;
+    IBOutlet UILabel *messageLabel;
+    IBOutlet UIView *messageView;
     
     UIImage *favImage;
     NSString *favImageName;
-    LoadingView *loadingView;
 }
 
 @property (nonatomic, strong) UIImage *favImage;
