@@ -31,8 +31,9 @@
         //initialize
         self.tag = i; //[[data objectForKey:@"IdPhoto"] intValue];
         
-        int row = i/3;
-        int col = i % 3;
+        int row = i/((IS_IPHONE_5) ? 3 : 2);
+        int col = i % ((IS_IPHONE_5) ? 3 : 2);
+        
         self.frame = CGRectMake(
                                 1.5*kPadding+col*(kThumbSideW+kPadding),
                                 2.5*kPadding+row*(kThumbSideH+kPadding),
@@ -68,6 +69,8 @@
             thumbView.frame = CGRectMake(0,0,kThumbSideW,kThumbSideH);
             thumbView.contentMode = UIViewContentModeScaleAspectFill;
             thumbView.clipsToBounds = YES;
+
+            
 			[self insertSubview: thumbView belowSubview: caption];
 		}];
         
@@ -86,6 +89,11 @@
 		[queue addOperation:imageOperation];
         [queue addOperation:catImageOperation];
     }
+    
+    self.backgroundColor = [UIColor clearColor];
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = 5;
+    
     return self;
 }
 

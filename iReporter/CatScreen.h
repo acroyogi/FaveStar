@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GalleryDataDelegate.h"
 
 #define TotalNoOfcategories 8
 
@@ -20,10 +21,14 @@
     
     UIImage *favImage;
     NSString *favImageName;
+    
+    id<GalleryDataDelegate> delegate;
 }
 
 @property (nonatomic, strong) UIImage *favImage;
 @property (nonatomic, strong) NSString *favImageName;
+
+@property (nonatomic, strong) id<GalleryDataDelegate> delegate;
 
 // launch the camera 
 -(IBAction)btnCameraTapped:(id)sender;

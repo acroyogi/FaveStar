@@ -7,11 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
 #import "StreamScreen.h"
-
-#define DEFAULT_LOCATION ((CLLocation*)[[CLLocation alloc] initWithLatitude:38.891751 longitude:-77.039834])
-
 
 @implementation AppDelegate
 
@@ -56,6 +52,7 @@
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
     [self registerLocationManager];
+    [self loadLoggedInUserDetails];
     [self customizeAppearance];
     // _navController.navigationBar.tintColor = [UIColor redColor];
     // _navController.navigationBar.tintColor = [UIColor colorWithRed:.8 green:.1 blue:.2 alpha:1];
@@ -141,5 +138,13 @@
 	}
 }
 
+- (void)loadLoggedInUserDetails {
+    
+    NSUserDefaults	*defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *userDict = ([defaults objectForKey:kLoggedInUserDetails] != nil && [[defaults objectForKey:kLoggedInUserDetails] count] > 0) ? [defaults objectForKey:kLoggedInUserDetails] : [NSDictionary dictionary];
+    
+    [[API sharedInstance] setUser: userDict];
+}
 
 @end

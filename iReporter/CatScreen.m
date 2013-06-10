@@ -40,6 +40,8 @@ NSString *gXdataType = @"gperson";
 @synthesize favImage;
 @synthesize favImageName;
 
+@synthesize delegate;
+
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
@@ -305,6 +307,10 @@ NSString *gXdataType = @"gperson";
                                        //success
                                        [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
                                        
+                                       if(self.delegate != nil) {
+                                           [self.delegate galleryDataDidChange];
+                                       }
+                                       
                                        
                                    } else {
                                        //error, check for expired session and if so - authorize the user
@@ -410,7 +416,11 @@ NSString *gXdataType = @"gperson";
         [Utility setButtonImageForAllState:catButton image:imageName];
         
         if((catButton.tag != btn.tag)) {
+            catButton.userInteractionEnabled = NO;
             [Utility animateViewWithAlpha:0.0 duration:4 view:catButton];
+        }
+        else {
+            catButton.userInteractionEnabled = YES;
         }
     }
     

@@ -26,6 +26,8 @@
 @synthesize totalStreamCount;
 @synthesize streamList;
 
+@synthesize isInitialLoadDone;
+
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
@@ -33,11 +35,31 @@
     [super viewDidLoad];
     
     self.streamList = [NSArray array];
+    
     self.navigationItem.title = @"FaveStar";
-    self.navigationItem.rightBarButtonItem = btnCompose;
     self.navigationItem.leftBarButtonItem = btnRefresh;
-	//show the photo stream
-	[self refreshStream];
+
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@""
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(showSettingsView)];
+    [settingsButton setImage:[UIImage imageNamed:@"settings.png"]];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnCompose, settingsButton, nil]];
+    
+	[self refreshStream]; //show the photo stream
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    if ([[API sharedInstance] isAuthorized] && self.isInitialLoadDone == NO) {
+        
+        self.isInitialLoadDone = YES;
+        [self showCameraView];
+    }
 }
 
 -(IBAction)btnRefreshTapped {
@@ -70,7 +92,7 @@
         [listView addSubview: photoView];
     }    
     // 3 update scroll list's height
-    int listHeight = ([stream count]/3 + 1)*(kThumbSideH+kPadding);
+    int listHeight = ([stream count]/((IS_IPHONE_5) ? 3 : 2) + 1)*(kThumbSideH+kPadding);
     [listView setContentSize:CGSizeMake(320, listHeight)];
     [listView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:YES];
 }
@@ -94,9 +116,14 @@
         CatScreen *catScreen = segue.destinationViewController;
         catScreen.favImage = self.favImage;
         catScreen.favImageName = self.favName;
+        catScreen.delegate = self;
     }
 }
 
+- (void)galleryDataDidChange {
+    
+    [self refreshStream];
+}
 
 - (IBAction)showCameraView {
     
@@ -108,6 +135,12 @@
     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
 #endif
     [self presentModalViewController:imagePicker animated:YES];
+}
+
+
+- (void)showSettingsView {
+    
+    [self performSegueWithIdentifier:@"ShowSettings" sender:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

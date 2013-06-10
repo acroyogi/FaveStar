@@ -64,7 +64,10 @@
 		//result returned
 		NSDictionary* res = [[json objectForKey:@"result"] objectAtIndex:0];
 		if ([json objectForKey:@"error"]==nil && [[res objectForKey:@"IdUser"] intValue]>0) {
-			[[API sharedInstance] setUser: res];
+			
+            [[API sharedInstance] setUser: res];
+            [Utility syncDefaults:kLoggedInUserDetails dataToSync:res];
+            
 			[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 			//show message to the user
 			[[[UIAlertView alloc] initWithTitle:@"Logged in" message:[NSString stringWithFormat:@"Welcome back, %@!",[res objectForKey:@"username"]] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
@@ -74,6 +77,22 @@
 		}
 	}];
 
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationLandscapeRight;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoView.h"
+#import "GalleryDataDelegate.h"
 
-@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GalleryDataDelegate> {
     IBOutlet UIBarButtonItem* btnCompose;
     IBOutlet UIBarButtonItem* btnRefresh;
     IBOutlet UIScrollView* listView;
@@ -22,6 +23,8 @@
     
     int totalStreamCount;
     NSArray *streamList;
+    
+    BOOL isInitialLoadDone;
 }
 
 @property (nonatomic, strong) UIImage *favImage;
@@ -29,6 +32,8 @@
 
 @property int totalStreamCount;
 @property (nonatomic, strong) NSArray *streamList;
+
+@property BOOL isInitialLoadDone;
 
 //refresh the photo stream
 - (IBAction)btnRefreshTapped;
