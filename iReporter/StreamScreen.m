@@ -73,10 +73,11 @@
     //just call the "stream" command from the web API
     [[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"stream", @"command", nil] onCompletion:^(NSDictionary *json) {
 		//got stream
-        self.totalStreamCount = ([json objectForKey:@"result"] != nil) ? [[json objectForKey:@"result"] count] : 0;
-        self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : [NSArray array];
-		[self showStream:[json objectForKey:@"result"]];
+        self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
+        self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
+		[self showStream:self.streamList];
 	}];
+    
 }
 
 -(void)showStream:(NSArray*)stream {
