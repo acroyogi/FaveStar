@@ -15,6 +15,7 @@
 }
 
 - (IBAction)loginOrLogout:(id)sender;
+- (IBAction)showOfflineFaves:(id)sender;
 - (IBAction)cancel:(id)sender;
 
 @end

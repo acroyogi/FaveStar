@@ -290,40 +290,64 @@ NSString *gXdataType = @"gperson";
     
     fldTitle.enabled = NO;
     
-    //upload the image and the title to the web service
-    [[API sharedInstance] commandWithParams:[NSMutableDictionary
-                                             dictionaryWithObjectsAndKeys:
-                                             gXdataType, @"command",
-                                             UIImageJPEGRepresentation(photo.image,70), @"file",
-                                             [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude], @"lat",
-                                             [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude], @"lon",
-                                             self.favImageName, @"title",
-                                             
-                                             nil]
-                               onCompletion:^(NSDictionary *json) {
-                                   
-                                   //completion
-                                   if (![json objectForKey:@"error"]) {
-                                       //success
-                                       [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
+    
+    if([Utility isNetworkAvailable]) {
+        
+        //upload the image and the title to the web service
+        [[API sharedInstance] commandWithParams:[NSMutableDictionary
+                                                 dictionaryWithObjectsAndKeys:
+                                                 gXdataType, @"command",
+                                                 UIImageJPEGRepresentation(photo.image,70), @"file",
+                                                 [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude], @"lat",
+                                                 [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude], @"lon",
+                                                 self.favImageName, @"title",
+                                                 
+                                                 nil]
+                                   onCompletion:^(NSDictionary *json) {
                                        
-                                       if(self.delegate != nil) {
-                                           [self.delegate galleryDataDidChange];
+                                       //completion
+                                       if (![json objectForKey:@"error"]) {
+                                           //success
+                                           [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
+                                           
+                                           if(self.delegate != nil) {
+                                               [self.delegate galleryDataDidChange];
+                                           }
+                                           
+                                           
+                                       } else {
+                                           //error, check for expired session and if so - authorize the user
+                                           NSString* errorMsg = [json objectForKey:@"error"];
+                                           [UIAlertView error:errorMsg];
+                                           if ([@"Authorization required" compare:errorMsg]==NSOrderedSame) {
+                                               [self performSegueWithIdentifier:@"ShowLogin" sender:nil];
+                                           }
                                        }
-                                       
-                                       
-                                   } else {
-                                       //error, check for expired session and if so - authorize the user
-                                       NSString* errorMsg = [json objectForKey:@"error"];
-                                       [UIAlertView error:errorMsg];
-                                       if ([@"Authorization required" compare:errorMsg]==NSOrderedSame) {
-                                           [self performSegueWithIdentifier:@"ShowLogin" sender:nil];
-                                       }
-                                   }
-                                   fldTitle.enabled = YES;
-                                   fldTitle.text = self.favImageName;
-                                   [self hideMessageView];
-                               }];
+                                       fldTitle.enabled = YES;
+                                       fldTitle.text = self.favImageName;
+                                       [self hideMessageView];
+                                   }];
+    }
+    else {
+        NSLog(@"No Network");
+        
+        NSMutableDictionary *data = [NSMutableDictionary dictionary];
+        [data setObject:UIImageJPEGRepresentation(photo.image,70) forKey:@"image"];
+        [data setObject:self.favImageName forKey:@"faveTitle"];
+        [data setObject:[[API sharedInstance].user objectForKey:@"IdUser"] forKey:@"userId"];
+        [data setObject:gXdataType forKey:@"cat"];
+        [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude] forKey:@"lat"];
+        [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude] forKey:@"lon"];
+        [data setObject:@"0" forKey:@"isUploaded"];
+        
+        [UploadQueue insert:data];
+        
+        [Utility showAlertWithTitle:@"" message:[NSString stringWithFormat:@"Saved to your local Favefeeds, it will be updated to server once your connection goes online."] delegate:nil];
+        
+        fldTitle.enabled = YES;
+        fldTitle.text = self.favImageName;
+        [self hideMessageView];
+    }
     
 }
 

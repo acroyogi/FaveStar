@@ -59,6 +59,14 @@
 		C4190E9C175DE85300FA25F3 /* fave-cat-1006-512.png in Resources */ = {isa = PBXBuildFile; fileRef = C4190E8C175DE85300FA25F3 /* fave-cat-1006-512.png */; };
 		C4190E9D175DE85300FA25F3 /* fave-cat-1007-50g-512.png in Resources */ = {isa = PBXBuildFile; fileRef = C4190E8D175DE85300FA25F3 /* fave-cat-1007-50g-512.png */; };
 		C4190E9E175DE85300FA25F3 /* fave-cat-1007-512.png in Resources */ = {isa = PBXBuildFile; fileRef = C4190E8E175DE85300FA25F3 /* fave-cat-1007-512.png */; };
+		C41DDA3F1767214100A0BB6B /* gFavesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA3D1767214100A0BB6B /* gFavesModel.xcdatamodeld */; };
+		C41DDA411767227B00A0BB6B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41DDA401767227B00A0BB6B /* CoreData.framework */; };
+		C41DDA47176724FA00A0BB6B /* UploadQueue+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */; };
+		C41DDA4E1767408300A0BB6B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA4D1767408200A0BB6B /* Reachability.m */; };
+		C41DDA51176749FA00A0BB6B /* UploadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA50176749F900A0BB6B /* UploadQueue.m */; };
+		C41DDA5417674C9700A0BB6B /* OfflineFaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA5317674C9700A0BB6B /* OfflineFaves.m */; };
+		C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */; };
+		C41DDA5A1767521A00A0BB6B /* OfflineFaveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */; };
 		C4B27EFF1765B3ED0013ADAF /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27EFE1765B3ED0013ADAF /* settings@2x.png */; };
 		C4B27F011765B4260013ADAF /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27F001765B4260013ADAF /* settings.png */; };
 		C4B27F041765C74D0013ADAF /* SettingsScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B27F031765C74D0013ADAF /* SettingsScreen.m */; };
@@ -170,6 +178,19 @@
 		C4190E8C175DE85300FA25F3 /* fave-cat-1006-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fave-cat-1006-512.png"; sourceTree = "<group>"; };
 		C4190E8D175DE85300FA25F3 /* fave-cat-1007-50g-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fave-cat-1007-50g-512.png"; sourceTree = "<group>"; };
 		C4190E8E175DE85300FA25F3 /* fave-cat-1007-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fave-cat-1007-512.png"; sourceTree = "<group>"; };
+		C41DDA3E1767214100A0BB6B /* gFavesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = gFavesModel.xcdatamodel; sourceTree = "<group>"; };
+		C41DDA401767227B00A0BB6B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C41DDA43176724FA00A0BB6B /* UploadQueue+DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadQueue+DAO.h"; sourceTree = "<group>"; };
+		C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadQueue+DAO.m"; sourceTree = "<group>"; };
+		C41DDA4C1767408200A0BB6B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		C41DDA4D1767408200A0BB6B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		C41DDA4F176749F900A0BB6B /* UploadQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadQueue.h; sourceTree = "<group>"; };
+		C41DDA50176749F900A0BB6B /* UploadQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadQueue.m; sourceTree = "<group>"; };
+		C41DDA5217674C9600A0BB6B /* OfflineFaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineFaves.h; sourceTree = "<group>"; };
+		C41DDA5317674C9700A0BB6B /* OfflineFaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineFaves.m; sourceTree = "<group>"; };
+		C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineFaveCell.m; sourceTree = "<group>"; };
+		C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfflineFaveCell.xib; sourceTree = "<group>"; };
+		C41DDA581767521A00A0BB6B /* OfflineFaveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineFaveCell.h; sourceTree = "<group>"; };
 		C4B27EFD1765AB4E0013ADAF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C4B27EFE1765B3ED0013ADAF /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		C4B27F001765B4260013ADAF /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -215,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41DDA411767227B00A0BB6B /* CoreData.framework in Frameworks */,
 				C40EA0D8175C9E0700C31E10 /* CoreLocation.framework in Frameworks */,
 				9C427B0E14FA4DBA00C708B8 /* SystemConfiguration.framework in Frameworks */,
 				9C60DA8914E53C7100442413 /* CoreImage.framework in Frameworks */,
@@ -233,6 +255,8 @@
 		9C21AF0714E4579F00DB003E = {
 			isa = PBXGroup;
 			children = (
+				C41DDA401767227B00A0BB6B /* CoreData.framework */,
+				C41DDA3D1767214100A0BB6B /* gFavesModel.xcdatamodeld */,
 				C40EA0D7175C9E0700C31E10 /* CoreLocation.framework */,
 				FA1302C21757F133004C68C5 /* Default-568h@2x.png */,
 				9CC4019216086CB300EAA7AA /* AFNetworking */,
@@ -311,6 +335,8 @@
 				9C9C950614E56EA100AA9BC3 /* StreamPhotoScreen.m */,
 				C4B27F021765C74D0013ADAF /* SettingsScreen.h */,
 				C4B27F031765C74D0013ADAF /* SettingsScreen.m */,
+				C41DDA5217674C9600A0BB6B /* OfflineFaves.h */,
+				C41DDA5317674C9700A0BB6B /* OfflineFaves.m */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -361,6 +387,10 @@
 		C40EA0CD175C79A200C31E10 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				C41DDA551767521A00A0BB6B /* Cell */,
+				C41DDA4C1767408200A0BB6B /* Reachability.h */,
+				C41DDA4D1767408200A0BB6B /* Reachability.m */,
+				C41DDA42176724FA00A0BB6B /* DBModel */,
 				C4B27F051765D9950013ADAF /* GalleryDataDelegate.h */,
 				C4B27EFD1765AB4E0013ADAF /* Constants.h */,
 				C4CCDA2D1760972D000E2338 /* Utility.h */,
@@ -403,6 +433,27 @@
 				C4190E8E175DE85300FA25F3 /* fave-cat-1007-512.png */,
 			);
 			path = category;
+			sourceTree = "<group>";
+		};
+		C41DDA42176724FA00A0BB6B /* DBModel */ = {
+			isa = PBXGroup;
+			children = (
+				C41DDA4F176749F900A0BB6B /* UploadQueue.h */,
+				C41DDA50176749F900A0BB6B /* UploadQueue.m */,
+				C41DDA43176724FA00A0BB6B /* UploadQueue+DAO.h */,
+				C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */,
+			);
+			path = DBModel;
+			sourceTree = "<group>";
+		};
+		C41DDA551767521A00A0BB6B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C41DDA581767521A00A0BB6B /* OfflineFaveCell.h */,
+				C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */,
+				C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		FA1302AE1757EB3A004C68C5 /* cats */ = {
@@ -546,6 +597,7 @@
 				C4190E9E175DE85300FA25F3 /* fave-cat-1007-512.png in Resources */,
 				C4B27EFF1765B3ED0013ADAF /* settings@2x.png in Resources */,
 				C4B27F011765B4260013ADAF /* settings.png in Resources */,
+				C41DDA5A1767521A00A0BB6B /* OfflineFaveCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +635,12 @@
 				C40EA0D4175C879400C31E10 /* LoadingView.m in Sources */,
 				C4CCDA2F1760972D000E2338 /* Utility.m in Sources */,
 				C4B27F041765C74D0013ADAF /* SettingsScreen.m in Sources */,
+				C41DDA3F1767214100A0BB6B /* gFavesModel.xcdatamodeld in Sources */,
+				C41DDA47176724FA00A0BB6B /* UploadQueue+DAO.m in Sources */,
+				C41DDA4E1767408300A0BB6B /* Reachability.m in Sources */,
+				C41DDA51176749FA00A0BB6B /* UploadQueue.m in Sources */,
+				C41DDA5417674C9700A0BB6B /* OfflineFaves.m in Sources */,
+				C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +755,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C41DDA3D1767214100A0BB6B /* gFavesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C41DDA3E1767214100A0BB6B /* gFavesModel.xcdatamodel */,
+			);
+			currentVersion = C41DDA3E1767214100A0BB6B /* gFavesModel.xcdatamodel */;
+			path = gFavesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9C21AF0914E4579F00DB003E /* Project object */;
 }

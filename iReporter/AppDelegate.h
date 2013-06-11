@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreData/CoreData.h>
 #import "Constants.h"
 #import "API.h"
 
@@ -15,6 +16,11 @@
     
     CLLocationManager *locationManager;
 	CLLocation *userLocation;
+    
+@private
+    NSManagedObjectContext *managedObjectContext_;
+    NSManagedObjectModel *managedObjectModel_;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -25,6 +31,11 @@
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *userLocation;
 
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 - (void)loadLoggedInUserDetails;
+- (NSString *)applicationDocumentsDirectory;
 
 @end

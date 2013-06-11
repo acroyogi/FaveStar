@@ -12,3 +12,6 @@
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 #define IS_IPHONE_5 (IS_IPHONE && IS_WIDESCREEN)
+
+#define DATA_STORE_NAME @"gFaves"
+#define DATA_STORE_SQLITE_FILE_NAME [NSString stringWithFormat:@"%@.sqlite", DATA_STORE_NAME]

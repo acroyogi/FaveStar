@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GalleryDataDelegate.h"
+#import "Utility.h"
+#import "UploadQueue+DAO.h"
 
 #define TotalNoOfcategories 8
 

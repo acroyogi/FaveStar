@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoView.h"
 #import "GalleryDataDelegate.h"
+#import "Utility.h"
 
 @interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GalleryDataDelegate> {
     IBOutlet UIBarButtonItem* btnCompose;

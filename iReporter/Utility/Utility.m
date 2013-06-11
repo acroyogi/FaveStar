@@ -50,4 +50,35 @@
     [btn setTitle:text forState:UIControlStateReserved];
 }
 
++ (BOOL)writeArrayToPlist:(NSString*)fileName data:(NSArray*)plistArray {
+    
+	NSString *writablePath = [[self documentsDirectory] stringByAppendingPathComponent:fileName];
+	return [plistArray writeToFile:writablePath atomically:YES];
+}
+
++ (NSString *)documentsDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [paths objectAtIndex:0];
+}
+
++ (NSArray *)arrayFromFile:(NSString *)fileName {
+    
+	NSString *resourcePath = [[self documentsDirectory] stringByAppendingPathComponent:fileName];
+	NSArray *fileData = [NSArray arrayWithContentsOfFile:resourcePath];
+	return fileData;
+}
+
++ (BOOL)isNetworkAvailable {
+
+    //check whether connection is available
+    Reachability *internetReach;
+    internetReach = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus = [internetReach currentReachabilityStatus];
+    if(netStatus == NotReachable) {
+        return NO;
+    }
+
+    return YES;
+}
+
 @end

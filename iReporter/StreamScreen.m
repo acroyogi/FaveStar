@@ -65,6 +65,7 @@
 -(IBAction)btnRefreshTapped {
     
 	[self refreshStream];
+//    [self loadDataFromLocal];
 }
 
 -(void)refreshStream {
@@ -76,10 +77,18 @@
         self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
         self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
 		[self showStream:self.streamList];
+        [Utility writeArrayToPlist:@"test.plist" data:self.streamList ];
 	}];
-    
 }
 
+- (void)loadDataFromLocal {
+    
+    self.streamList = [Utility arrayFromFile:@"test.plist"];
+    self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
+    [self showStream:self.streamList];
+    
+    NSLog(@"self.streamList -- %@", self.streamList);
+}
 -(void)showStream:(NSArray*)stream {
     // 1 remove old photos
     for (UIView* view in listView.subviews) {

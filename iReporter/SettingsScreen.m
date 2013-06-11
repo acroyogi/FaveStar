@@ -73,12 +73,17 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)showOfflineFaves:(id)sender {
+    [self performSegueWithIdentifier:@"ShowOfflineFaves" sender:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationLandscapeRight;
 }
@@ -94,5 +99,6 @@
     }
     return NO;
 }
+ */
 
 @end
