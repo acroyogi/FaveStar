@@ -65,30 +65,34 @@
 -(IBAction)btnRefreshTapped {
     
 	[self refreshStream];
-//    [self loadDataFromLocal];
 }
 
 -(void)refreshStream {
     
     self.totalStreamCount = 0;
-    //just call the "stream" command from the web API
-    [[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"stream", @"command", nil] onCompletion:^(NSDictionary *json) {
-		//got stream
-        self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
-        self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
-		[self showStream:self.streamList];
-        [Utility writeArrayToPlist:@"test.plist" data:self.streamList ];
-	}];
+    
+    if([Utility isNetworkAvailable]) {
+        //just call the "stream" command from the web API
+        [[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"stream", @"command", nil] onCompletion:^(NSDictionary *json) {
+            //got stream
+            self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
+            self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
+            [self showStream:self.streamList];
+            [Utility writeArrayToPlist:@"faves.plist" data:self.streamList ];
+        }];
+    }
+    else {
+        [self loadFavesFromDevice];
+    }
 }
 
-- (void)loadDataFromLocal {
+- (void)loadFavesFromDevice {
     
-    self.streamList = [Utility arrayFromFile:@"test.plist"];
+    self.streamList = [Utility arrayFromFile:@"faves.plist"];
     self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
     [self showStream:self.streamList];
-    
-    NSLog(@"self.streamList -- %@", self.streamList);
 }
+
 -(void)showStream:(NSArray*)stream {
     // 1 remove old photos
     for (UIView* view in listView.subviews) {
