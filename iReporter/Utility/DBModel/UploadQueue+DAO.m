@@ -95,6 +95,23 @@
     return obj;
 }
 
++ (BOOL)deleteUploadQueue:(UploadQueue*)obj {
+    
+    NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
+    
+    if(obj != nil) {
+        [context deleteObject:obj];
+    }
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Error in deleting UploadQueue Object - error: %@" ,error);
+        return NO;
+    }
+    
+    return YES;
+}
+
 // Call this method when an object is inserted.
 - (void)awakeFromInsert {
     

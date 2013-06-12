@@ -111,8 +111,7 @@
     UIButton *btn = (UIButton*)sender;
     
     UploadQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
-    
-    
+
     if([Utility isNetworkAvailable]) {
         
         //upload the image and the title to the web service
@@ -134,6 +133,7 @@
                                            
                                            [obj setIsUploaded:[NSNumber numberWithInt:1]];
                                            [UploadQueue update:obj];
+                                           //[UploadQueue deleteUploadQueue:obj];
                                            [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
                                            
                                        } else {

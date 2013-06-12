@@ -78,7 +78,7 @@
             self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
             self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
             [self showStream:self.streamList];
-            [Utility writeArrayToPlist:@"faves.plist" data:self.streamList ];
+            [Utility writeArrayToPlist:FAVES_DATA_FILE data:self.streamList ];
         }];
     }
     else {
@@ -88,7 +88,7 @@
 
 - (void)loadFavesFromDevice {
     
-    self.streamList = [Utility arrayFromFile:@"faves.plist"];
+    self.streamList = [Utility arrayFromFile:FAVES_DATA_FILE];
     self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
     [self showStream:self.streamList];
 }

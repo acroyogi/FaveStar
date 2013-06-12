@@ -677,6 +677,7 @@
         <class className="CatScreen" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CatScreen.h"/>
             <relationships>
+                <relationship kind="action" name="btnActionTapped:"/>
                 <relationship kind="action" name="btnCameraTapped:"/>
                 <relationship kind="action" name="btnCatEventTapped:"/>
                 <relationship kind="action" name="btnCatIdeaTapped:"/>

@@ -23,5 +23,6 @@
 + (UploadQueue *)populateObjectWithDic:(UploadQueue*)obj dictionary:(NSMutableDictionary *)details;
 
 + (UploadQueue *)update:(UploadQueue *)obj;
++ (BOOL)deleteUploadQueue:(UploadQueue*)obj;
 
 @end

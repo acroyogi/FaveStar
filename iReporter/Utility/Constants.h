@@ -15,3 +15,5 @@
 
 #define DATA_STORE_NAME @"gFaves"
 #define DATA_STORE_SQLITE_FILE_NAME [NSString stringWithFormat:@"%@.sqlite", DATA_STORE_NAME]
+
+#define FAVES_DATA_FILE @"faves.plist"
