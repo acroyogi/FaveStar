@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qVx-xu-zIz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qVx-xu-zIz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -252,7 +252,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ujh-IN-IoQ">
-                                <rect key="frame" x="255" y="86" width="150" height="37"/>
+                                <rect key="frame" x="250" y="86" width="150" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <state key="normal" title="Register" backgroundImage="aquaButtonActivated@2x.png">
@@ -280,6 +280,18 @@
                                 <color key="textColor" red="0.4156863093" green="0.4156863093" blue="0.41960787770000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WK7-dN-ohH">
+                                <rect key="frame" x="408" y="86" width="150" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Cancel" backgroundImage="redButtonActivated@2x.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -670,6 +682,7 @@
         <image name="fave-cat-1007-512.png" width="512" height="512"/>
         <image name="fave_place512.png" width="512" height="512"/>
         <image name="greenButtonActivated@2x.png" width="416" height="84"/>
+        <image name="redButtonActivated@2x.png" width="416" height="84"/>
         <image name="regular_heptagon.png" width="225" height="225"/>
         <image name="share.png" width="68" height="67"/>
     </resources>
@@ -677,7 +690,6 @@
         <class className="CatScreen" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CatScreen.h"/>
             <relationships>
-                <relationship kind="action" name="btnActionTapped:"/>
                 <relationship kind="action" name="btnCameraTapped:"/>
                 <relationship kind="action" name="btnCatEventTapped:"/>
                 <relationship kind="action" name="btnCatIdeaTapped:"/>
