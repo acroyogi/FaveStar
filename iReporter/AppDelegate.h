@@ -18,14 +18,13 @@
 	CLLocation *userLocation;
     
 @private
+    
     NSManagedObjectContext *managedObjectContext_;
     NSManagedObjectModel *managedObjectModel_;
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 }
 
 @property (strong, nonatomic) UIWindow *window;
-
-// AppDelegate.h
 @property (nonatomic, strong) UINavigationController *navController;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;

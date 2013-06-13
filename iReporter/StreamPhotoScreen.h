@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
+#import "UILabel+AdjustFontSize.h"
+#import "Utility.h"
 
 @interface StreamPhotoScreen : UIViewController<UIScrollViewDelegate>
 {
@@ -15,6 +17,9 @@
     IBOutlet UIImageView* photoView;
     IBOutlet UIImageView* catIconView;
     IBOutlet UILabel* lblTitle;
+    IBOutlet UILabel* lblLocation;
+    IBOutlet UILabel* lblDate;
+    IBOutlet UILabel* lblUserName;
     
     IBOutlet UIScrollView *scrollView;
     

@@ -71,6 +71,7 @@
 		C4B27F011765B4260013ADAF /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27F001765B4260013ADAF /* settings.png */; };
 		C4B27F041765C74D0013ADAF /* SettingsScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B27F031765C74D0013ADAF /* SettingsScreen.m */; };
 		C4CCDA2F1760972D000E2338 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CCDA2E1760972D000E2338 /* Utility.m */; };
+		C4E5AE621769C9690032646D /* UILabel+AdjustFontSize.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E5AE611769C9690032646D /* UILabel+AdjustFontSize.m */; };
 		DD60A6C5158375BA005D980D /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD60A6C4158375BA005D980D /* PhotoView.m */; };
 		DDA2937F1582F5180052B4F9 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA2937E1582F5180052B4F9 /* API.m */; };
 		FA1302B71757EB71004C68C5 /* fave_event512.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1302AF1757EB71004C68C5 /* fave_event512.png */; };
@@ -200,6 +201,8 @@
 		C4B27F051765D9950013ADAF /* GalleryDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryDataDelegate.h; sourceTree = "<group>"; };
 		C4CCDA2D1760972D000E2338 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		C4CCDA2E1760972D000E2338 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		C4E5AE601769C9690032646D /* UILabel+AdjustFontSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+AdjustFontSize.h"; path = "Utility/UILabel+AdjustFontSize.h"; sourceTree = "<group>"; };
+		C4E5AE611769C9690032646D /* UILabel+AdjustFontSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+AdjustFontSize.m"; path = "Utility/UILabel+AdjustFontSize.m"; sourceTree = "<group>"; };
 		DD60A6C3158375BA005D980D /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
 		DD60A6C4158375BA005D980D /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		DDA2937D1582F5180052B4F9 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 				9CFE0B9714E5B12B00408F86 /* UIImage+RoundedCorner.m */,
 				9C21AF7F14E4642000DB003E /* UIAlertView+error.h */,
 				9C21AF8014E4642000DB003E /* UIAlertView+error.m */,
+				C4E5AE601769C9690032646D /* UILabel+AdjustFontSize.h */,
+				C4E5AE611769C9690032646D /* UILabel+AdjustFontSize.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				C41DDA51176749FA00A0BB6B /* UploadQueue.m in Sources */,
 				C41DDA5417674C9700A0BB6B /* OfflineFaves.m in Sources */,
 				C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */,
+				C4E5AE621769C9690032646D /* UILabel+AdjustFontSize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

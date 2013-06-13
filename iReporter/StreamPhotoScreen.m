@@ -44,27 +44,17 @@
 
     self.IdPhoto = [NSNumber numberWithInt:[[data objectForKey:@"IdPhoto"] intValue]];
     lblTitle.text = [data objectForKey:@"title"];
+    //lblDate.text = @"Yesterday";
+    lblLocation.text = @"location name, city, state";
+    lblUserName.text = [NSString stringWithFormat:@"★%@", [data objectForKey:@"username"]];
+    
+    [lblTitle adjustsFontSizeToFitWidthWithMultipleLinesFromFontWithName:lblTitle.font.fontName size:23 andDescreasingFontBy:5];
 
-    /*
-	//load the caption of the selected photo
-	[[API sharedInstance] commandWithParams:[NSMutableDictionary
-                            dictionaryWithObjectsAndKeys:
-                            @"stream", @"command",
-                            self.IdPhoto, @"IdPhoto",
-                            nil]
-              onCompletion:^(NSDictionary *json) {
-                  [self hideLoadingView];
-                  //show the text in the label
-                  NSArray* list = [json objectForKey:@"result"];
-                  NSDictionary* photo = [list objectAtIndex:0];
-                  lblTitle.text = [photo objectForKey:@"title"];
-              }
-     ];
-     */
-
-    NSURL* catURL = [[API sharedInstance] urlForCatWithId:[data objectForKey:@"CAT_ID"]];
-    [catIconView setImageWithURL: catURL];
+    NSLog(@"cat - %@", [data objectForKey:@"CAT_ID"]);
+    
+    catIconView.image = [UIImage imageNamed:[Utility catImageNameById:[[data objectForKey:@"CAT_ID"] intValue]]];
 }
+
 
 - (void)loadScrollViewWithImages {
     

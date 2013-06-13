@@ -19,4 +19,6 @@
 
 + (BOOL)isNetworkAvailable;
 
++ (NSString*)catImageNameById:(int)catId;
+
 @end

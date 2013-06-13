@@ -15,6 +15,7 @@
 NSString *gXdataType = @"gperson";
 
 @interface CatScreen(private)
+
 -(void)takePhoto;
 
 -(void)uploadPerson;
@@ -41,12 +42,15 @@ NSString *gXdataType = @"gperson";
 @synthesize favImageName;
 
 @synthesize delegate;
+@synthesize loginViewDismissed;
 
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
     
     [super viewDidLoad];
+    self.loginViewDismissed = NO;
+    
     [self updateViewWithDetails];
     
     if(self.favImageName == nil) {
@@ -86,7 +90,7 @@ NSString *gXdataType = @"gperson";
     
     [super viewDidAppear:animated];
     
-    if (![[API sharedInstance] isAuthorized]) {
+    if (![[API sharedInstance] isAuthorized] && self.loginViewDismissed == NO) {
 		[self performSegueWithIdentifier:@"ShowLogin" sender:nil];
 	}
     else {
@@ -514,6 +518,23 @@ NSString *gXdataType = @"gperson";
         return NO;
     }
 
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([@"ShowLogin" compare: segue.identifier] == NSOrderedSame) {
+        
+        LoginScreen *loginScreen = segue.destinationViewController;
+        loginScreen.delegate = self;
+    }
+}
+
+#pragma - LoginScreenDelegate
+
+- (void)loginViewCancelled {
+    
+    self.loginViewDismissed = YES;
 }
 
 @end

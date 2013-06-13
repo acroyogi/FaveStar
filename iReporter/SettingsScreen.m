@@ -10,9 +10,13 @@
 
 @interface SettingsScreen ()
 
+@property BOOL loginViewDismissed;
+
 @end
 
 @implementation SettingsScreen
+
+@synthesize loginViewDismissed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.loginViewDismissed = NO;
     
 	// Do any additional setup after loading the view.
 }
@@ -37,6 +41,13 @@
     [self updateView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if(loginViewDismissed == YES) {;
+        [self cancel:nil];
+    }
+}
 
 - (void)updateView {
     
@@ -59,7 +70,8 @@
         //logged out from server
         [[API sharedInstance] setUser:nil];
         [Utility syncDefaults:kLoggedInUserDetails dataToSync:[NSDictionary dictionary]];
-        [self performSelectorOnMainThread:@selector(updateView) withObject:nil waitUntilDone:NO];
+        //[self performSelectorOnMainThread:@selector(updateView) withObject:nil waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(cancel:) withObject:nil waitUntilDone:NO];
         [self performSelectorOnMainThread:@selector(showLogoutSuccessMessage) withObject:nil waitUntilDone:NO];
 	}];
 }
@@ -75,6 +87,19 @@
 
 - (IBAction)showOfflineFaves:(id)sender {
     [self performSegueWithIdentifier:@"ShowOfflineFaves" sender:nil];
+}
+
+- (void)loginViewCancelled {
+    self.loginViewDismissed = YES;
+//    [self cancel:nil];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([@"ShowLogin" compare: segue.identifier] == NSOrderedSame) {
+        LoginScreen *loginScreen = segue.destinationViewController;
+        loginScreen.delegate = self;
+    }
 }
 
 - (void)didReceiveMemoryWarning

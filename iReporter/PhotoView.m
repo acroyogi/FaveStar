@@ -74,6 +74,8 @@
 			[self insertSubview: thumbView belowSubview: caption];
 		}];
         
+        /*
+         
         NSURL* catImageURL = [api urlForCatWithId:[data objectForKey:@"CAT_ID"]];
         
 		AFImageRequestOperation* catImageOperation = [AFImageRequestOperation imageRequestOperationWithRequest: [NSURLRequest requestWithURL:catImageURL] success:^(UIImage *image) {
@@ -85,9 +87,17 @@
 			[self insertSubview: catImageView aboveSubview:caption];
 		}];
 
+         */
+        
+        UIImageView* catImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:[Utility catImageNameById:[[data objectForKey:@"CAT_ID"] intValue]]]];
+        catImageView.frame = CGRectMake(3,kThumbSideH-20,18,18);
+        catImageView.contentMode = UIViewContentModeScaleAspectFill;
+        catImageView.clipsToBounds = YES;
+        [self insertSubview: catImageView aboveSubview:caption];
+        
         NSOperationQueue* queue = [[NSOperationQueue alloc] init];
 		[queue addOperation:imageOperation];
-        [queue addOperation:catImageOperation];
+//        [queue addOperation:catImageOperation];
     }
     
     self.backgroundColor = [UIColor clearColor];

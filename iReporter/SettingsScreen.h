@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Utility.h"
+#import "LoginScreen.h"
 
-@interface SettingsScreen : UIViewController {
+@interface SettingsScreen : UIViewController<LoginScreenDelegate> {
     
     IBOutlet UIButton *loginButton;
 }

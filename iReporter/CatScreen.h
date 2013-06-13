@@ -10,10 +10,11 @@
 #import "GalleryDataDelegate.h"
 #import "Utility.h"
 #import "UploadQueue+DAO.h"
+#import "LoginScreen.h"
 
 #define TotalNoOfcategories 8
 
-@interface CatScreen : UIViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate>
+@interface CatScreen : UIViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate, LoginScreenDelegate>
 {
     IBOutlet UIImageView* photo;
     IBOutlet UIBarButtonItem* btnCamera;
@@ -25,12 +26,15 @@
     NSString *favImageName;
     
     id<GalleryDataDelegate> delegate;
+    
+    BOOL loginViewDismissed;
 }
 
 @property (nonatomic, strong) UIImage *favImage;
 @property (nonatomic, strong) NSString *favImageName;
 
 @property (nonatomic, strong) id<GalleryDataDelegate> delegate;
+@property BOOL loginViewDismissed;;
 
 // launch the camera 
 -(IBAction)btnCameraTapped:(id)sender;
