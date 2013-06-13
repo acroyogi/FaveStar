@@ -83,6 +83,7 @@
 		FA1302BE1757EB71004C68C5 /* fave_thing512.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1302B61757EB71004C68C5 /* fave_thing512.png */; };
 		FA1302C11757EDA9004C68C5 /* CatScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1302C01757EDA9004C68C5 /* CatScreen.m */; };
 		FA1302C31757F133004C68C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1302C21757F133004C68C5 /* Default-568h@2x.png */; };
+		FA4656D317698AF30076C7E6 /* redButtonActivated@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA4656D217698AF30076C7E6 /* redButtonActivated@2x.png */; };
 		FA5FBBE41751B31400309D4D /* paper.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5FBBE31751B31400309D4D /* paper.png */; };
 		FA5FBBE81751B49B00309D4D /* surf_gradient_textured_32.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5FBBE61751B49B00309D4D /* surf_gradient_textured_32.png */; };
 		FA5FBBE91751B49B00309D4D /* surf_gradient_textured_44.png in Resources */ = {isa = PBXBuildFile; fileRef = FA5FBBE71751B49B00309D4D /* surf_gradient_textured_44.png */; };
@@ -214,6 +215,7 @@
 		FA1302BF1757ED9E004C68C5 /* CatScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatScreen.h; sourceTree = "<group>"; };
 		FA1302C01757EDA9004C68C5 /* CatScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatScreen.m; sourceTree = "<group>"; };
 		FA1302C21757F133004C68C5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FA4656D217698AF30076C7E6 /* redButtonActivated@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redButtonActivated@2x.png"; sourceTree = "<group>"; };
 		FA5FBBE31751B31400309D4D /* paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paper.png; sourceTree = "<group>"; };
 		FA5FBBE61751B49B00309D4D /* surf_gradient_textured_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surf_gradient_textured_32.png; sourceTree = "<group>"; };
 		FA5FBBE71751B49B00309D4D /* surf_gradient_textured_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = surf_gradient_textured_44.png; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 		FA5FBBE51751B48A00309D4D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FA4656D217698AF30076C7E6 /* redButtonActivated@2x.png */,
 				C4B27F001765B4260013ADAF /* settings.png */,
 				C4B27EFE1765B3ED0013ADAF /* settings@2x.png */,
 				C4190E7E175DE85200FA25F3 /* category */,
@@ -598,6 +601,7 @@
 				C4B27EFF1765B3ED0013ADAF /* settings@2x.png in Resources */,
 				C4B27F011765B4260013ADAF /* settings.png in Resources */,
 				C41DDA5A1767521A00A0BB6B /* OfflineFaveCell.xib in Resources */,
+				FA4656D317698AF30076C7E6 /* redButtonActivated@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +668,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobomo, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobomo, LLC";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -679,6 +684,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -689,7 +696,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobomo, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobomo, LLC";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -698,6 +706,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -706,14 +716,14 @@
 		9C21AF3714E457A000DB003E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Roberts (C6SYESFGSS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gregory Roberts (C6SYESFGSS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobomo, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobomo, LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iReporter/gFaves-Prefix.pch";
 				INFOPLIST_FILE = "iReporter/gFaves-Info.plist";
 				PRODUCT_NAME = FaveTube;
-				PROVISIONING_PROFILE = "E4354D71-6F9C-405A-A875-36B5B8B0A103";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E4354D71-6F9C-405A-A875-36B5B8B0A103";
+				PROVISIONING_PROFILE = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -721,14 +731,14 @@
 		9C21AF3814E457A000DB003E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Roberts (C6SYESFGSS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gregory Roberts (C6SYESFGSS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobomo, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobomo, LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iReporter/gFaves-Prefix.pch";
 				INFOPLIST_FILE = "iReporter/gFaves-Info.plist";
 				PRODUCT_NAME = FaveTube;
-				PROVISIONING_PROFILE = "E4354D71-6F9C-405A-A875-36B5B8B0A103";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E4354D71-6F9C-405A-A875-36B5B8B0A103";
+				PROVISIONING_PROFILE = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "17E877D7-FB73-4CFC-8E36-0DD2452EAE53";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
