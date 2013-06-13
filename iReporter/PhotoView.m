@@ -47,7 +47,7 @@
         caption.textColor = [UIColor whiteColor];
         caption.textAlignment = UITextAlignmentLeft;
         caption.font = [UIFont systemFontOfSize:12];
-        caption.text = [NSString stringWithFormat:@"       %@ : +%@", [data objectForKey:@"title"], [data objectForKey:@"username"]];
+        caption.text = [NSString stringWithFormat:@"       %@ : ★%@", [data objectForKey:@"title"], [data objectForKey:@"username"]];
         //caption.text = [NSString stringWithFormat:@" %@ : %@ : +%@", [data objectForKey:@"CAT_ID"], [data objectForKey:@"title"], [data objectForKey:@"username"]];
         // caption.text = [NSString stringWithFormat:@" %@ : +%@", [data objectForKey:@"title"], [data objectForKey:@"username"]];
         // caption.text = [NSString stringWithFormat:@" %@ : @%@",[data objectForKey:@"username"]];
