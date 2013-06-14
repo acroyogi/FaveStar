@@ -28,6 +28,12 @@
     id<GalleryDataDelegate> delegate;
     
     BOOL loginViewDismissed;
+    
+//    int currentUploadId;
+    
+    UploadQueue *uploadQueueObj;
+    
+    int selectedCatId;
 }
 
 @property (nonatomic, strong) UIImage *favImage;
@@ -35,6 +41,11 @@
 
 @property (nonatomic, strong) id<GalleryDataDelegate> delegate;
 @property BOOL loginViewDismissed;;
+
+//@property int currentUploadId;
+@property (nonatomic, strong) UploadQueue *uploadQueueObj;
+
+@property int selectedCatId;
 
 // launch the camera 
 -(IBAction)btnCameraTapped:(id)sender;

@@ -43,7 +43,7 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"UploadQueue" inManagedObjectContext:context]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isUploaded = %@", [NSNumber numberWithInt:0]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"isMetadataUploaded = %@ OR isImageUploaded = %@", [NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
     
     NSArray *objects = [context executeFetchRequest:request error:nil];
     
@@ -71,12 +71,18 @@
 
     [obj setFaveTitle:[details objectForKey:@"faveTitle"]];
     [obj setCat:[details objectForKey:@"cat"]];
-    [obj setTimestamp:[NSDate date]];
-    [obj setIsUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isUploaded"] intValue]]];
+    //[obj setTimestamp:[NSDate date]];
+   // [obj setIsUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isUploaded"] intValue]]];
     [obj setUserId:[NSNumber numberWithInt:[[details objectForKey:@"userId"] intValue]]];
     [obj setImage:[details objectForKey:@"image"]];
     [obj setLat:[details objectForKey:@"lat"]];
     [obj setLon:[details objectForKey:@"lon"]];
+    [obj setIsMetadataUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isMetadataUploaded"] intValue]]];
+    [obj setIsImageUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isImageUploaded"] intValue]]];
+    [obj setCatId:[details objectForKey:@"catId"]];
+    [obj setCreatedate:[details objectForKey:@"createdate"]];
+    [obj setTimezone:[details objectForKey:@"timezone"]];
+    [obj setServerPhotoId:[details objectForKey:@"serverPhotoId"]];
 
     return obj;
 }

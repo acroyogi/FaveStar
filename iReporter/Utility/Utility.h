@@ -3,6 +3,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
+#import "API.h"
 
 @interface Utility : NSObject {
 	
@@ -18,7 +19,14 @@
 + (NSArray *)arrayFromFile:(NSString *)fileName;
 
 + (BOOL)isNetworkAvailable;
++ (BOOL)isAPIServerAvailable;
+
++ (NSDate *)dateFromString:(NSString *)dateString;
++ (NSString *)stringFromDate:(NSDate *)date format:(NSString*)format;
 
 + (NSString*)catImageNameById:(int)catId;
+
++ (NSString*)timeToString:(NSDate*)time;
++ (int)categoryIdByType:(id)sender;
 
 @end

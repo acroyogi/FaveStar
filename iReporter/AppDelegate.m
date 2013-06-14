@@ -56,6 +56,16 @@
     [self registerLocationManager];
     [self loadLoggedInUserDetails];
     [self customizeAppearance];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    // Set up Reachability
+    internetReachable = [Reachability reachabilityForInternetConnection];
+    [internetReachable startNotifier];
+    
     // _navController.navigationBar.tintColor = [UIColor redColor];
     // _navController.navigationBar.tintColor = [UIColor colorWithRed:.8 green:.1 blue:.2 alpha:1];
     return YES;
@@ -289,6 +299,100 @@
     
     return persistentStoreCoordinator_;
 }
+
+
+- (void)reachabilityChanged:(NSNotification *)notice {
+    // called after network status changes
+    
+    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    
+    if(internetStatus != NotReachable) {
+        
+        NSLog(@"The internet is working");
+        NSArray *offlineFaves = [UploadQueue allPendingUploadQueueObjectsInManagedObjectContext];
+        
+        for (UploadQueue *obj in offlineFaves) {
+            [self uploadOfflineData:obj];
+        }
+        
+    }
+   
+}
+
+- (void)uploadOfflineData:(UploadQueue*)obj {
+    
+    if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
+        [self initialImageUpload:obj];
+    }
+    else if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+        [self uploadMetadata:obj];
+    }
+}
+
+- (void)initialImageUpload:(UploadQueue*)obj {
+    
+    if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
+        
+        //upload the image and the title to the web service
+        [[API sharedInstance] commandWithParams:[NSMutableDictionary
+                                                 dictionaryWithObjectsAndKeys:
+                                                 @"fastimage", @"command",
+                                                 obj.image, @"file",
+                                                 obj.lat, @"lat",
+                                                 obj.lon, @"lon",
+                                                 obj.faveTitle, @"title",
+                                                 obj.createdate, @"createdate",
+                                                 obj.timezone, @"timezone",
+                                                 nil]
+                                   onCompletion:^(NSDictionary *json) {
+                                       //completion
+                                       if (![json objectForKey:@"error"]) {
+                                           
+                                           [obj setServerPhotoId:[NSNumber numberWithInt:[[json objectForKey:@"successful"] intValue]]];
+                                           [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
+                                           [UploadQueue update:obj];
+                                           
+                                           if([obj.catId intValue] != 0 && [obj.isMetadataUploaded boolValue] == NO) {
+                                               [self uploadMetadata:obj];
+                                           }
+                                           
+                                       } 
+                                       
+                                   }];
+    }
+}
+
+- (void)uploadMetadata:(UploadQueue*)obj {
+    
+    
+    if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+        
+        if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
+            
+            //upload the image and the title to the web service
+            [[API sharedInstance] commandWithParams:[NSMutableDictionary
+                                                     dictionaryWithObjectsAndKeys:
+                                                     @"fastmeta", @"command",
+                                                     obj.faveTitle, @"title",
+                                                     [NSString stringWithFormat:@"%d", [obj.serverPhotoId intValue]], @"IdPhoto",
+                                                     [NSString stringWithFormat:@"%d", [obj.catId intValue]], @"catID",
+                                                     nil]
+                                       onCompletion:^(NSDictionary *json) {
+                                           //completion
+                                           if (![json objectForKey:@"error"]) {
+                                               //success
+ 
+                                               [obj setIsMetadataUploaded:[NSNumber numberWithInt:1]];
+                                               [UploadQueue update:obj];
+                                               
+                                           }
+                                       }];
+        }
+        
+    }
+    
+}
+
 
 
 @end

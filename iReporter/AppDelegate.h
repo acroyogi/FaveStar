@@ -11,11 +11,15 @@
 #import <CoreData/CoreData.h>
 #import "Constants.h"
 #import "API.h"
+#import "Reachability.h"
+#import "UploadQueue+DAO.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate> {
     
     CLLocationManager *locationManager;
 	CLLocation *userLocation;
+    
+    Reachability *internetReachable;
     
 @private
     
@@ -36,5 +40,7 @@
 
 - (void)loadLoggedInUserDetails;
 - (NSString *)applicationDocumentsDirectory;
+
+- (void)uploadOfflineData:(UploadQueue*)obj;
 
 @end

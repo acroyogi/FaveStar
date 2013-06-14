@@ -42,19 +42,22 @@
 
     NSDictionary *data = [self.dataList objectAtIndex:self.currentImageId];
 
+    NSString *date = [[data objectForKey:@"DATETIME_CREATE"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *zone = [[data objectForKey:@"TIMEZONE_CREATE"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    zone = ([zone hasPrefix:@"+"] == NO && [zone hasPrefix:@"-"] == NO) ? [NSString stringWithFormat:@"GMT+%@", zone ] : [NSString stringWithFormat:@"GMT%@", zone ];
+    
+    NSString *dateString = [NSString stringWithFormat:@"%@ %@", date, zone];
+
     self.IdPhoto = [NSNumber numberWithInt:[[data objectForKey:@"IdPhoto"] intValue]];
     lblTitle.text = [data objectForKey:@"title"];
-    //lblDate.text = @"Yesterday";
-    lblLocation.text = @"location name, city, state";
+    lblDate.text = [Utility timeToString:[Utility dateFromString:dateString]]; // @"Yesterday";
+    lblLocation.text = [data objectForKey:@"LOC_ID"];
     lblUserName.text = [NSString stringWithFormat:@"★%@", [data objectForKey:@"username"]];
     
     [lblTitle adjustsFontSizeToFitWidthWithMultipleLinesFromFontWithName:lblTitle.font.fontName size:23 andDescreasingFontBy:5];
-
-    NSLog(@"cat - %@", [data objectForKey:@"CAT_ID"]);
     
     catIconView.image = [UIImage imageNamed:[Utility catImageNameById:[[data objectForKey:@"CAT_ID"] intValue]]];
 }
-
 
 - (void)loadScrollViewWithImages {
     

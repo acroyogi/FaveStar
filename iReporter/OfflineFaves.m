@@ -111,29 +111,43 @@
     UIButton *btn = (UIButton*)sender;
     
     UploadQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
+    
+    if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
+        [self initialImageUpload:obj];
+    }
+    else if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+        [self uploadMetadata:obj];
+    }
+}
 
-    if([Utility isNetworkAvailable]) {
+- (void)initialImageUpload:(UploadQueue*)obj {
+
+    if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
         
         //upload the image and the title to the web service
         [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                                  dictionaryWithObjectsAndKeys:
-                                                 obj.cat, @"command",
+                                                 @"fastimage", @"command",
                                                  obj.image, @"file",
-                                                 obj.faveTitle, @"title",
                                                  obj.lat, @"lat",
                                                  obj.lon, @"lon",
-                                                 
+                                                 obj.faveTitle, @"title",
+                                                 obj.createdate, @"createdate",
+                                                 obj.timezone, @"timezone",
                                                  nil]
                                    onCompletion:^(NSDictionary *json) {
-                                       
                                        //completion
                                        if (![json objectForKey:@"error"]) {
-                                           //success
-                                           [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
+                                           //                                           self.currentUploadId = [[json objectForKey:@"successful"] intValue];
                                            
-                                           [obj setIsUploaded:[NSNumber numberWithInt:1]];
+                                           [obj setServerPhotoId:[NSNumber numberWithInt:[[json objectForKey:@"successful"] intValue]]];
+                                           [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
                                            [UploadQueue update:obj];
-                                           //[UploadQueue deleteUploadQueue:obj];
+                                           
+                                           if([obj.catId intValue] != 0 && [obj.isMetadataUploaded boolValue] == NO) {
+                                               [self uploadMetadata:obj];
+                                           }
+                                           
                                            [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
                                            
                                        } else {
@@ -150,6 +164,53 @@
     else {
         [UIAlertView error:@"No network"];
     }
+    
+    
+}
+
+
+
+- (void)uploadMetadata:(UploadQueue*)obj {
+    
+    
+    if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+        
+        if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
+            
+            //upload the image and the title to the web service
+            [[API sharedInstance] commandWithParams:[NSMutableDictionary
+                                                     dictionaryWithObjectsAndKeys:
+                                                     @"fastmeta", @"command",
+                                                     obj.faveTitle, @"title",
+                                                     [NSString stringWithFormat:@"%d", [obj.serverPhotoId intValue]], @"IdPhoto",
+                                                     [NSString stringWithFormat:@"%d", [obj.catId intValue]], @"catID",
+                                                     nil]
+                                       onCompletion:^(NSDictionary *json) {
+                                           //completion
+                                           if (![json objectForKey:@"error"]) {
+                                               //success
+                                               [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
+                                               
+                                               [obj setIsMetadataUploaded:[NSNumber numberWithInt:1]];
+                                               [UploadQueue update:obj];
+                                               
+                                               [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
+                                               
+                                           } else {
+                                               //error, check for expired session and if so - authorize the user
+                                               NSString* errorMsg = [json objectForKey:@"error"];
+                                               [UIAlertView error:errorMsg];
+                                               if ([@"Authorization required" compare:errorMsg]==NSOrderedSame) {
+                                                   [self performSegueWithIdentifier:@"ShowLogin" sender:nil];
+                                               }
+                                           }
+                                       }];
+        }
+        else {
+           [UIAlertView error:@"No network"];
+        }
+    }
+    
 }
 
 - (void)refreshViewWithData {
@@ -157,5 +218,62 @@
     self.offlineFaves = [UploadQueue allPendingUploadQueueObjectsInManagedObjectContext];
     [listTableView reloadData];
 }
+
+/*
+ 
+ 
+ - (void)upload:(id)sender {
+ 
+ UIButton *btn = (UIButton*)sender;
+ 
+ UploadQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
+ 
+ if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
+ [self initialImageUpload:obj];
+ }
+ else if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+ [self uploadMetadata:obj];
+ }
+ 
+ if([Utility isNetworkAvailable]) {
+ 
+ //upload the image and the title to the web service
+ [[API sharedInstance] commandWithParams:[NSMutableDictionary
+ dictionaryWithObjectsAndKeys:
+ obj.cat, @"command",
+ obj.image, @"file",
+ obj.faveTitle, @"title",
+ obj.lat, @"lat",
+ obj.lon, @"lon",
+ 
+ nil]
+ onCompletion:^(NSDictionary *json) {
+ 
+ //completion
+ if (![json objectForKey:@"error"]) {
+ //success
+ [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
+ 
+ [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
+ [UploadQueue update:obj];
+ //[UploadQueue deleteUploadQueue:obj];
+ [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
+ 
+ } else {
+ //error, check for expired session and if so - authorize the user
+ NSString* errorMsg = [json objectForKey:@"error"];
+ [UIAlertView error:errorMsg];
+ if ([@"Authorization required" compare:errorMsg]==NSOrderedSame) {
+ [self performSegueWithIdentifier:@"ShowLogin" sender:nil];
+ }
+ }
+ 
+ }];
+ }
+ else {
+ [UIAlertView error:@"No network"];
+ }
+ }
+ */
 
 @end

@@ -2,16 +2,20 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="UploadQueue" representedClassName="UploadQueue" syncable="YES">
         <attribute name="cat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="catId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="createdate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="faveTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="isUploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isImageUploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isMetadataUploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="lat" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="queueId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="serverPhotoId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timezone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UploadQueue" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="UploadQueue" positionX="160" positionY="192" width="128" height="240"/>
     </elements>
 </model>

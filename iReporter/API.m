@@ -8,12 +8,6 @@
 
 #import "API.h"
 
-//the web location of the service
-#define kAPIHost @"http://www.glassfaves.com"
-#define kAPIPath @"ios/"
-#define kAPIImgPath @"_imgbank/"
-#define kAPIIconImgPath @"http://www.favestar.net/_img/ui/icons/cats/numbers/"
-
 @implementation API
 
 @synthesize user;
@@ -72,6 +66,7 @@
 			[formData appendPartWithFileData:uploadFile name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
 		}
 	}];
+
     AFJSONRequestOperation* operation = [[AFJSONRequestOperation alloc] initWithRequest: apiRequest];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         //success!

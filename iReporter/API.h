@@ -10,6 +10,17 @@
 #import "AFNetworking.h"
 #import "MBMNetworkActivity.h"
 
+//the web location of the service
+//#define kAPIHost @"http://www.glassfaves.com"
+#define kAPIHost @"http://www.favestar.net"
+
+// favestar.net/_api/
+
+//#define kAPIPath @"ios/"
+#define kAPIPath @"_api/"
+#define kAPIImgPath @"_imgbank/"
+#define kAPIIconImgPath @"http://www.favestar.net/_img/ui/icons/cats/numbers/"
+
 typedef void (^JSONResponseBlock)(NSDictionary* json);
 
 @interface API : AFHTTPClient

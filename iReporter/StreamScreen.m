@@ -71,13 +71,14 @@
     
     self.totalStreamCount = 0;
     
-    if([Utility isNetworkAvailable]) {
+    if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
         //just call the "stream" command from the web API
         [[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"stream", @"command", nil] onCompletion:^(NSDictionary *json) {
             //got stream
             self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
             self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
             [self showStream:self.streamList];
+            
             [Utility writeArrayToPlist:FAVES_DATA_FILE data:self.streamList ];
         }];
     }
