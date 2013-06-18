@@ -14,8 +14,6 @@
 //#define kAPIHost @"http://www.glassfaves.com"
 #define kAPIHost @"http://www.favestar.net"
 
-// favestar.net/_api/
-
 //#define kAPIPath @"ios/"
 #define kAPIPath @"_api/"
 #define kAPIImgPath @"_imgbank/"

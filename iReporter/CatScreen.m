@@ -54,6 +54,7 @@ NSString *gXdataType = @"gperson";
 -(void)viewDidLoad {
     
     [super viewDidLoad];
+    
     self.loginViewDismissed = NO;
     self.favImageName = @"";
     
@@ -305,18 +306,19 @@ NSString *gXdataType = @"gperson";
     if(self.uploadQueueObj == nil) {
         
         NSMutableDictionary *data = [NSMutableDictionary dictionary];
+        
         [data setObject:UIImageJPEGRepresentation(photo.image,70) forKey:@"image"];
         [data setObject:self.favImageName forKey:@"faveTitle"];
-        [data setObject:[[API sharedInstance].user objectForKey:@"IdUser"] forKey:@"userId"];
-        [data setObject:@"" forKey:@"cat"];
         [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude] forKey:@"lat"];
         [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude] forKey:@"lon"];
-        [data setObject:@"0" forKey:@"isImageUploaded"];
-        [data setObject:@"0" forKey:@"isMetadataUploaded"];
-        [data setObject:createdate forKey:@"createdate"];
-        [data setObject:zone forKey:@"timezone"];
+        [data setObject:[NSNumber numberWithInt:0] forKey:@"isImageUploaded"];
+        [data setObject:[NSNumber numberWithInt:0] forKey:@"isMetadataUploaded"];        
         [data setObject:[NSNumber numberWithInt:0] forKey:@"catId"];
         [data setObject:[NSNumber numberWithInt:0] forKey:@"serverPhotoId"];
+        [data setObject:createdate forKey:@"createdate"];
+        [data setObject:zone forKey:@"timezone"];
+        [data setObject:[[API sharedInstance].user objectForKey:@"IdUser"] forKey:@"userId"];
+        [data setObject:@"" forKey:@"cat"];
         
         self.uploadQueueObj = [UploadQueue insert:data];
     }

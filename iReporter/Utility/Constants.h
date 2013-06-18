@@ -13,7 +13,7 @@
 
 #define IS_IPHONE_5 (IS_IPHONE && IS_WIDESCREEN)
 
-#define DATA_STORE_NAME @"gFavesV1"
+#define DATA_STORE_NAME @"gFavesV2"
 #define DATA_STORE_SQLITE_FILE_NAME [NSString stringWithFormat:@"%@.sqlite", DATA_STORE_NAME]
 
 #define FAVES_DATA_FILE @"faves.plist"
