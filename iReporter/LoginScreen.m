@@ -82,16 +82,10 @@
 }
 
 - (IBAction)cancel:(id)sender {
-    
-    NSLog(@"self.delegate -- %@", self.delegate);
 
     if(self.delegate != nil) {
-        
-        
         [self.delegate loginViewCancelled];
         [self dismissModalViewControllerAnimated:NO];
-
-        
     }
     else {
         [self dismissModalViewControllerAnimated:YES];
