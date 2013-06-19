@@ -9,6 +9,8 @@ project.xcworkspace
 .xcworkspace
 xcuserdata
 
+Breakpoints.xcbkptlist
+
 # Ignore .svn files
 .svn
 .DS_Store
