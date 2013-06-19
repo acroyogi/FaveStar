@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     
-    self.offlineFaves = [UploadQueue allPendingUploadQueueObjectsInManagedObjectContext];
+    self.offlineFaves = [UploadDataQueue allPendingUploadDataQueueObjectsInManagedObjectContext];
 	// Do any additional setup after loading the view.
 }
 
@@ -65,7 +65,7 @@
         cell = [nib objectAtIndex:0];
     }
         
-    UploadQueue *data = [self.offlineFaves objectAtIndex:indexPath.row];
+    UploadDataQueue *data = [self.offlineFaves objectAtIndex:indexPath.row];
     cell.faveNameLabel.text = data.faveTitle;
     cell.faveNameLabel.textColor = [UIColor darkGrayColor];
     
@@ -110,17 +110,17 @@
     
     UIButton *btn = (UIButton*)sender;
     
-    UploadQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
+    UploadDataQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
     
-    if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
+    if([obj.imageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
         [self initialImageUpload:obj];
     }
-    else if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+    else if([obj.serverPhotoId intValue] != 0 && [obj.imageUploaded intValue] == 1) {
         [self uploadMetadata:obj];
     }
 }
 
-- (void)initialImageUpload:(UploadQueue*)obj {
+- (void)initialImageUpload:(UploadDataQueue*)obj {
 
     if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
         
@@ -141,10 +141,10 @@
                                            //                                           self.currentUploadId = [[json objectForKey:@"successful"] intValue];
                                            
                                            [obj setServerPhotoId:[NSNumber numberWithInt:[[json objectForKey:@"successful"] intValue]]];
-                                           [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
-                                           [UploadQueue update:obj];
+                                           [obj setImageUploaded:[NSNumber numberWithInt:1]];
+                                           [UploadDataQueue update:obj];
                                            
-                                           if([obj.catId intValue] != 0 && [obj.isMetadataUploaded boolValue] == NO) {
+                                           if([obj.catId intValue] != 0 && [obj.detailsUploaded intValue] == 0) {
                                                [self uploadMetadata:obj];
                                            }
                                            
@@ -170,10 +170,10 @@
 
 
 
-- (void)uploadMetadata:(UploadQueue*)obj {
+- (void)uploadMetadata:(UploadDataQueue*)obj {
     
     
-    if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+    if([obj.serverPhotoId intValue] != 0 && [obj.imageUploaded intValue] == 1) {
         
         if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
             
@@ -191,8 +191,8 @@
                                                //success
                                                [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
                                                
-                                               [obj setIsMetadataUploaded:[NSNumber numberWithInt:1]];
-                                               [UploadQueue update:obj];
+                                               [obj setDetailsUploaded:[NSNumber numberWithInt:1]];
+                                               [UploadDataQueue update:obj];
                                                
                                                [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
                                                
@@ -215,7 +215,7 @@
 
 - (void)refreshViewWithData {
     
-    self.offlineFaves = [UploadQueue allPendingUploadQueueObjectsInManagedObjectContext];
+    self.offlineFaves = [UploadDataQueue allPendingUploadDataQueueObjectsInManagedObjectContext];
     [listTableView reloadData];
 }
 
@@ -226,7 +226,7 @@
  
  UIButton *btn = (UIButton*)sender;
  
- UploadQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
+ UploadDataQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
  
  if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
  [self initialImageUpload:obj];
@@ -255,8 +255,8 @@
  [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
  
  [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
- [UploadQueue update:obj];
- //[UploadQueue deleteUploadQueue:obj];
+ [UploadDataQueue update:obj];
+ //[UploadDataQueue deleteUploadQueue:obj];
  [self performSelectorOnMainThread:@selector(refreshViewWithData) withObject:nil waitUntilDone:NO];
  
  } else {

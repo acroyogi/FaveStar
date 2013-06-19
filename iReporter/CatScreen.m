@@ -308,19 +308,28 @@ NSString *gXdataType = @"gperson";
         NSMutableDictionary *data = [NSMutableDictionary dictionary];
         
         [data setObject:UIImageJPEGRepresentation(photo.image,70) forKey:@"image"];
-        [data setObject:self.favImageName forKey:@"faveTitle"];
+        [data setObject:((self.favImageName != nil) ? self.favImageName : @"") forKey:@"faveTitle"];
         [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude] forKey:@"lat"];
         [data setObject:[NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude] forKey:@"lon"];
-        [data setObject:[NSNumber numberWithInt:0] forKey:@"isImageUploaded"];
-        [data setObject:[NSNumber numberWithInt:0] forKey:@"isMetadataUploaded"];        
+        
+        [data setObject:[NSNumber numberWithInt:0] forKey:@"imageUploaded"];
+        [data setObject:[NSNumber numberWithInt:0] forKey:@"detailsUploaded"];        
         [data setObject:[NSNumber numberWithInt:0] forKey:@"catId"];
         [data setObject:[NSNumber numberWithInt:0] forKey:@"serverPhotoId"];
+        
         [data setObject:createdate forKey:@"createdate"];
         [data setObject:zone forKey:@"timezone"];
-        [data setObject:[[API sharedInstance].user objectForKey:@"IdUser"] forKey:@"userId"];
+        
+        if([[API sharedInstance] isAuthorized]) {
+            [data setObject:([API sharedInstance].user != nil) ? [[API sharedInstance].user objectForKey:@"IdUser"] : @"0" forKey:@"userId"];
+        }
+        else {
+            [data setObject:@"0" forKey:@"userId"];
+        }
+        
         [data setObject:@"" forKey:@"cat"];
         
-        self.uploadQueueObj = [UploadQueue insert:data];
+        self.uploadQueueObj = [UploadDataQueue insert:data];
     }
     
     if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
@@ -341,10 +350,10 @@ NSString *gXdataType = @"gperson";
                                        if (![json objectForKey:@"error"]) {
                                            
                                            [self.uploadQueueObj setServerPhotoId:[NSNumber numberWithInt:[[json objectForKey:@"successful"] intValue]]];
-                                           [self.uploadQueueObj setIsImageUploaded:[NSNumber numberWithInt:1]];
-                                           [UploadQueue update:self.uploadQueueObj];
+                                           [self.uploadQueueObj setImageUploaded:[NSNumber numberWithInt:1]];
+                                           [UploadDataQueue update:self.uploadQueueObj];
                                            
-                                           if([self.uploadQueueObj.catId intValue] != 0 && [self.uploadQueueObj.isMetadataUploaded boolValue] == NO) {
+                                           if([self.uploadQueueObj.catId intValue] != 0 && [self.uploadQueueObj.detailsUploaded  intValue] == 1) {
                                                [self uploadMetadata];
                                            }                                            
                                            
@@ -371,11 +380,11 @@ NSString *gXdataType = @"gperson";
     [self.uploadQueueObj setCat:gXdataType];
     [self.uploadQueueObj setFaveTitle:self.favImageName];
     
-    [UploadQueue update:self.uploadQueueObj];
+    [UploadDataQueue update:self.uploadQueueObj];
     
     if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
         
-        if([self.uploadQueueObj.serverPhotoId intValue] != 0 && [self.uploadQueueObj.isImageUploaded boolValue] == YES) {
+        if([self.uploadQueueObj.serverPhotoId intValue] != 0 && [self.uploadQueueObj.imageUploaded intValue] == 1) {
 
             //upload the image and the title to the web service
             [[API sharedInstance] commandWithParams:[NSMutableDictionary
@@ -391,8 +400,8 @@ NSString *gXdataType = @"gperson";
                                                //success
                                                [[[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your fave is saved" delegate:nil cancelButtonTitle:@"Yay!" otherButtonTitles: nil] show];
                                                
-                                               [self.uploadQueueObj setIsMetadataUploaded:[NSNumber numberWithInt:1]];
-                                               [UploadQueue update:self.uploadQueueObj];
+                                               [self.uploadQueueObj setDetailsUploaded:[NSNumber numberWithInt:1]];
+                                               [UploadDataQueue update:self.uploadQueueObj];
                                                
                                                if(self.delegate != nil) {
                                                    [self.delegate galleryDataDidChange];

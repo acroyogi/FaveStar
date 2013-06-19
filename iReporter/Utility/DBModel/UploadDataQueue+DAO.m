@@ -1,21 +1,21 @@
 //
-//  UploadQueue+DAO.m
+//  UploadDataQueue+DAO.m
 //  gFaves
 //
 //  Created by Adarsh M on 6/11/13.
 //  Copyright (c) 2013 Greg Roberts. All rights reserved.
 //
 
-#import "UploadQueue+DAO.h"
+#import "UploadDataQueue+DAO.h"
 
-@implementation UploadQueue (DAO)
+@implementation UploadDataQueue (DAO)
 
-+ (NSArray*)allUploadQueueObjectsInManagedObjectContext {
++ (NSArray*)allUploadDataQueueObjectsInManagedObjectContext {
     
     NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UploadQueue" inManagedObjectContext:context]];
+    [request setEntity:[NSEntityDescription entityForName:@"UploadDataQueue" inManagedObjectContext:context]];
     
     NSArray *objects = [context executeFetchRequest:request error:nil];
     
@@ -23,12 +23,12 @@
     
 }
 
-+ (NSArray*)uploadQueueObjectsByQueueId:(NSNumber*)queueId {
++ (NSArray*)UploadDataQueueObjectsByQueueId:(NSNumber*)queueId {
     
     NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UploadQueue" inManagedObjectContext:context]];
+    [request setEntity:[NSEntityDescription entityForName:@"UploadDataQueue" inManagedObjectContext:context]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"queueId = %@", queueId]];
     
     NSArray *objects = [context executeFetchRequest:request error:nil];
@@ -37,13 +37,13 @@
 }
 
 
-+ (NSArray*)allPendingUploadQueueObjectsInManagedObjectContext {
++ (NSArray*)allPendingUploadDataQueueObjectsInManagedObjectContext {
     
     NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UploadQueue" inManagedObjectContext:context]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isMetadataUploaded = %@ OR isImageUploaded = %@", [NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
+    [request setEntity:[NSEntityDescription entityForName:@"UploadDataQueue" inManagedObjectContext:context]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"detailsUploaded = %@ OR imageUploaded = %@", [NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
     
     NSArray *objects = [context executeFetchRequest:request error:nil];
     
@@ -51,23 +51,23 @@
 }
 
 // Insert a new object.
-+ (UploadQueue *)insert:(NSMutableDictionary *)details {
++ (UploadDataQueue *)insert:(NSMutableDictionary *)details {
     
     NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
     
-    UploadQueue *obj = [NSEntityDescription insertNewObjectForEntityForName:@"UploadQueue" inManagedObjectContext:context];
-    obj = [UploadQueue populateObjectWithDic:obj dictionary:details];
+    UploadDataQueue *obj = [NSEntityDescription insertNewObjectForEntityForName:@"UploadDataQueue" inManagedObjectContext:context];
+    obj = [UploadDataQueue populateObjectWithDic:obj dictionary:details];
     
     NSError *error;
     if (![context save:&error]) {
-        NSLog(@"Error in inserting UploadQueue Object - error:%@" ,error);
+        NSLog(@"Error in inserting UploadDataQueue Object - error:%@" ,error);
     }
     
     return obj;
 }
 
 // Populate an object by using the values of a dictionary.
-+ (UploadQueue *)populateObjectWithDic:(UploadQueue*)obj dictionary:(NSMutableDictionary *)details {
++ (UploadDataQueue *)populateObjectWithDic:(UploadDataQueue*)obj dictionary:(NSMutableDictionary *)details {
 
     [obj setFaveTitle:[details objectForKey:@"faveTitle"]];
     [obj setCat:[details objectForKey:@"cat"]];
@@ -77,8 +77,8 @@
     [obj setImage:[details objectForKey:@"image"]];
     [obj setLat:[details objectForKey:@"lat"]];
     [obj setLon:[details objectForKey:@"lon"]];
-    [obj setIsMetadataUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isMetadataUploaded"] intValue]]];
-    [obj setIsImageUploaded:[NSNumber numberWithInt:[[details objectForKey:@"isImageUploaded"] intValue]]];
+    [obj setDetailsUploaded:[details objectForKey:@"detailsUploaded"]];
+    [obj setImageUploaded:[details objectForKey:@"imageUploaded"]];    
     [obj setCatId:[details objectForKey:@"catId"]];
     [obj setCreatedate:[details objectForKey:@"createdate"]];
     [obj setTimezone:[details objectForKey:@"timezone"]];
@@ -87,7 +87,7 @@
     return obj;
 }
 
-+ (UploadQueue *)update:(UploadQueue *)obj {
++ (UploadDataQueue *)update:(UploadDataQueue *)obj {
     
     if(obj != nil) {
         
@@ -95,13 +95,13 @@
 
         NSError *error;
         if (![context save:&error]) {
-            NSLog(@"Error in updating UploadQueue Object - error:%@" ,error);
+            NSLog(@"Error in updating UploadDataQueue Object - error:%@" ,error);
         }
     }
     return obj;
 }
 
-+ (BOOL)deleteUploadQueue:(UploadQueue*)obj {
++ (BOOL)deleteUploadDataQueue:(UploadDataQueue*)obj {
     
     NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
     
@@ -111,7 +111,7 @@
     
     NSError *error;
     if (![context save:&error]) {
-        NSLog(@"Error in deleting UploadQueue Object - error: %@" ,error);
+        NSLog(@"Error in deleting UploadDataQueue Object - error: %@" ,error);
         return NO;
     }
     

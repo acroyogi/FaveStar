@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GalleryDataDelegate.h"
 #import "Utility.h"
-#import "UploadQueue+DAO.h"
+#import "UploadDataQueue+DAO.h"
 #import "LoginScreen.h"
 
 #define TotalNoOfcategories 8
@@ -31,7 +31,7 @@
     
 //    int currentUploadId;
     
-    UploadQueue *uploadQueueObj;
+    UploadDataQueue *uploadQueueObj;
     
     int selectedCatId;
 }
@@ -43,7 +43,7 @@
 @property BOOL loginViewDismissed;;
 
 //@property int currentUploadId;
-@property (nonatomic, strong) UploadQueue *uploadQueueObj;
+@property (nonatomic, strong) UploadDataQueue *uploadQueueObj;
 
 @property int selectedCatId;
 

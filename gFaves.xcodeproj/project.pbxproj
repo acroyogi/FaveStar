@@ -61,12 +61,12 @@
 		C4190E9E175DE85300FA25F3 /* fave-cat-1007-512.png in Resources */ = {isa = PBXBuildFile; fileRef = C4190E8E175DE85300FA25F3 /* fave-cat-1007-512.png */; };
 		C41DDA3F1767214100A0BB6B /* gFavesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA3D1767214100A0BB6B /* gFavesModel.xcdatamodeld */; };
 		C41DDA411767227B00A0BB6B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41DDA401767227B00A0BB6B /* CoreData.framework */; };
-		C41DDA47176724FA00A0BB6B /* UploadQueue+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */; };
+		C41DDA47176724FA00A0BB6B /* UploadDataQueue+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA44176724FA00A0BB6B /* UploadDataQueue+DAO.m */; };
 		C41DDA4E1767408300A0BB6B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA4D1767408200A0BB6B /* Reachability.m */; };
 		C41DDA5417674C9700A0BB6B /* OfflineFaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA5317674C9700A0BB6B /* OfflineFaves.m */; };
 		C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */; };
 		C41DDA5A1767521A00A0BB6B /* OfflineFaveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */; };
-		C44E86FF176B257900786F21 /* UploadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C44E86FE176B257900786F21 /* UploadQueue.m */; };
+		C42F777C177178B0006AA033 /* UploadDataQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C42F777B177178B0006AA033 /* UploadDataQueue.m */; };
 		C4B27EFF1765B3ED0013ADAF /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27EFE1765B3ED0013ADAF /* settings@2x.png */; };
 		C4B27F011765B4260013ADAF /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27F001765B4260013ADAF /* settings.png */; };
 		C4B27F041765C74D0013ADAF /* SettingsScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B27F031765C74D0013ADAF /* SettingsScreen.m */; };
@@ -182,8 +182,8 @@
 		C4190E8E175DE85300FA25F3 /* fave-cat-1007-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fave-cat-1007-512.png"; sourceTree = "<group>"; };
 		C41DDA3E1767214100A0BB6B /* gFavesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = gFavesModel.xcdatamodel; sourceTree = "<group>"; };
 		C41DDA401767227B00A0BB6B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		C41DDA43176724FA00A0BB6B /* UploadQueue+DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadQueue+DAO.h"; sourceTree = "<group>"; };
-		C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadQueue+DAO.m"; sourceTree = "<group>"; };
+		C41DDA43176724FA00A0BB6B /* UploadDataQueue+DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadDataQueue+DAO.h"; sourceTree = "<group>"; };
+		C41DDA44176724FA00A0BB6B /* UploadDataQueue+DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadDataQueue+DAO.m"; sourceTree = "<group>"; };
 		C41DDA4C1767408200A0BB6B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		C41DDA4D1767408200A0BB6B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		C41DDA5217674C9600A0BB6B /* OfflineFaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineFaves.h; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 		C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineFaveCell.m; sourceTree = "<group>"; };
 		C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfflineFaveCell.xib; sourceTree = "<group>"; };
 		C41DDA581767521A00A0BB6B /* OfflineFaveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineFaveCell.h; sourceTree = "<group>"; };
-		C44E86FD176B257900786F21 /* UploadQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadQueue.h; sourceTree = "<group>"; };
-		C44E86FE176B257900786F21 /* UploadQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadQueue.m; sourceTree = "<group>"; };
+		C42F777A177178B0006AA033 /* UploadDataQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadDataQueue.h; sourceTree = "<group>"; };
+		C42F777B177178B0006AA033 /* UploadDataQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDataQueue.m; sourceTree = "<group>"; };
 		C4B27EFD1765AB4E0013ADAF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C4B27EFE1765B3ED0013ADAF /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		C4B27F001765B4260013ADAF /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -445,10 +445,10 @@
 		C41DDA42176724FA00A0BB6B /* DBModel */ = {
 			isa = PBXGroup;
 			children = (
-				C41DDA43176724FA00A0BB6B /* UploadQueue+DAO.h */,
-				C41DDA44176724FA00A0BB6B /* UploadQueue+DAO.m */,
-				C44E86FD176B257900786F21 /* UploadQueue.h */,
-				C44E86FE176B257900786F21 /* UploadQueue.m */,
+				C41DDA43176724FA00A0BB6B /* UploadDataQueue+DAO.h */,
+				C41DDA44176724FA00A0BB6B /* UploadDataQueue+DAO.m */,
+				C42F777A177178B0006AA033 /* UploadDataQueue.h */,
+				C42F777B177178B0006AA033 /* UploadDataQueue.m */,
 			);
 			path = DBModel;
 			sourceTree = "<group>";
@@ -645,12 +645,12 @@
 				C4CCDA2F1760972D000E2338 /* Utility.m in Sources */,
 				C4B27F041765C74D0013ADAF /* SettingsScreen.m in Sources */,
 				C41DDA3F1767214100A0BB6B /* gFavesModel.xcdatamodeld in Sources */,
-				C41DDA47176724FA00A0BB6B /* UploadQueue+DAO.m in Sources */,
+				C41DDA47176724FA00A0BB6B /* UploadDataQueue+DAO.m in Sources */,
 				C41DDA4E1767408300A0BB6B /* Reachability.m in Sources */,
 				C41DDA5417674C9700A0BB6B /* OfflineFaves.m in Sources */,
 				C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */,
 				C4E5AE621769C9690032646D /* UILabel+AdjustFontSize.m in Sources */,
-				C44E86FF176B257900786F21 /* UploadQueue.m in Sources */,
+				C42F777C177178B0006AA033 /* UploadDataQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

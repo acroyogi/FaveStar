@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UploadQueue+DAO.h"
+#import "UploadDataQueue+DAO.h"
 #import "OfflineFaveCell.h"
 #import "Utility.h"
 #import "UIAlertView+error.h"

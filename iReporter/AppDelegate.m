@@ -57,6 +57,7 @@
     [self loadLoggedInUserDetails];
     [self customizeAppearance];
     
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
@@ -65,6 +66,7 @@
     // Set up Reachability
     internetReachable = [Reachability reachabilityForInternetConnection];
     [internetReachable startNotifier];
+     */
     
     // _navController.navigationBar.tintColor = [UIColor redColor];
     // _navController.navigationBar.tintColor = [UIColor colorWithRed:.8 green:.1 blue:.2 alpha:1];
@@ -302,16 +304,15 @@
 
 
 - (void)reachabilityChanged:(NSNotification *)notice {
-    // called after network status changes
-    
+
     NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
     
     if(internetStatus != NotReachable) {
         
         NSLog(@"The internet is working");
-        NSArray *offlineFaves = [UploadQueue allPendingUploadQueueObjectsInManagedObjectContext];
+        NSArray *offlineFaves = [UploadDataQueue allPendingUploadDataQueueObjectsInManagedObjectContext];
         
-        for (UploadQueue *obj in offlineFaves) {
+        for (UploadDataQueue *obj in offlineFaves) {
             [self uploadOfflineData:obj];
         }
         
@@ -319,17 +320,17 @@
    
 }
 
-- (void)uploadOfflineData:(UploadQueue*)obj {
+- (void)uploadOfflineData:(UploadDataQueue*)obj {
     
-    if([obj.isImageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
+    if([obj.imageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
         [self initialImageUpload:obj];
     }
-    else if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+    else if([obj.serverPhotoId intValue] != 0 && [obj.imageUploaded boolValue] == YES) {
         [self uploadMetadata:obj];
     }
 }
 
-- (void)initialImageUpload:(UploadQueue*)obj {
+- (void)initialImageUpload:(UploadDataQueue*)obj {
     
     if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
         
@@ -349,10 +350,10 @@
                                        if (![json objectForKey:@"error"]) {
                                            
                                            [obj setServerPhotoId:[NSNumber numberWithInt:[[json objectForKey:@"successful"] intValue]]];
-                                           [obj setIsImageUploaded:[NSNumber numberWithInt:1]];
-                                           [UploadQueue update:obj];
+                                           [obj setImageUploaded:[NSNumber numberWithInt:1]];
+                                           [UploadDataQueue update:obj];
                                            
-                                           if([obj.catId intValue] != 0 && [obj.isMetadataUploaded boolValue] == NO) {
+                                           if([obj.catId intValue] != 0 && [obj.detailsUploaded boolValue] == NO) {
                                                [self uploadMetadata:obj];
                                            }
                                            
@@ -362,10 +363,10 @@
     }
 }
 
-- (void)uploadMetadata:(UploadQueue*)obj {
+- (void)uploadMetadata:(UploadDataQueue*)obj {
     
     
-    if([obj.serverPhotoId intValue] != 0 && [obj.isImageUploaded boolValue] == YES) {
+    if([obj.serverPhotoId intValue] != 0 && [obj.imageUploaded boolValue] == YES) {
         
         if([Utility isNetworkAvailable] && [Utility isAPIServerAvailable]) {
             
@@ -382,8 +383,8 @@
                                            if (![json objectForKey:@"error"]) {
                                                //success
  
-                                               [obj setIsMetadataUploaded:[NSNumber numberWithInt:1]];
-                                               [UploadQueue update:obj];
+                                               [obj setDetailsUploaded:[NSNumber numberWithInt:1]];
+                                               [UploadDataQueue update:obj];
                                                
                                            }
                                        }];
