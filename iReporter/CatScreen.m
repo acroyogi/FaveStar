@@ -437,8 +437,9 @@ NSString *gXdataType = @"gperson";
 }
 
 - (void)cancelView {
-    NSLog(@"cancelView --");
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)logout {
@@ -540,6 +541,7 @@ NSString *gXdataType = @"gperson";
         }
         else {
             [self animateSelectedCatButton:btn];
+            [Utility animateViewWithAlpha:0.0 duration:0.0 view:categoryTitleLabel];
         }
     }
     
