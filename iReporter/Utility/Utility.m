@@ -96,6 +96,13 @@
     return YES;
 }
 
++ (void)addHeaderLogo:(UINavigationController*)navController logo:(NSString*)logoName { 
+    
+    UIImage *image = [UIImage imageNamed:logoName];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [navController.navigationBar.topItem setTitleView:imageView];
+}
+
 + (NSString*)timeToString:(NSDate*)time {
     
     NSTimeInterval timeInterval = [time timeIntervalSinceNow];
@@ -112,15 +119,15 @@
         if(day_diff == 0){
             if(diff < 60) return @"just now";
             if(diff < 120) return @"1 minute ago";
-            if(diff < 3600) return [NSString stringWithFormat:@"%.0f  minutes ago", floor(diff / 60)] ;
+            if(diff < 3600) return [NSString stringWithFormat:@"%.0f minutes ago", floor(diff / 60)] ;
             if(diff < 7200) return @"1 hour ago";
-            if(diff < 86400) return [NSString stringWithFormat:@"%.0f  hours ago", floor(diff / 3600)] ;
+            if(diff < 86400) return [NSString stringWithFormat:@"%.0f hours ago", floor(diff / 3600)] ;
         }
         if(day_diff == 1) return @"Yesterday";
-        if(day_diff < 7) return [NSString stringWithFormat:@"%d  days ago", day_diff] ;
-        if(day_diff < 31) return [NSString stringWithFormat:@"%.0f   weeks ago", ceil(day_diff / 7)] ;;
+        if(day_diff < 7) return [NSString stringWithFormat:@"%d days ago", day_diff] ;
+        if(day_diff < 31) return [NSString stringWithFormat:@"%.0f weeks ago", ceil(day_diff / 7)] ;;
         if(day_diff < 60) return @"last month";
-        return @"++todo"; //date('F Y', $ts);
+        return @"a long time ago"; //date('F Y', $ts);
     }
     else {
         
@@ -133,8 +140,9 @@
             if(diff < 7200) return @"in an hour";
             if(diff < 86400) return [NSString stringWithFormat:@"in @%.0f hours", floor(diff / 3600)];
         }
-        /*
+        
         if(day_diff == 1) return @"Tomorrow";
+        /*
         if(day_diff < 4) return date('l', $ts);
         if(day_diff < 7 + (7 - date('w'))) return 'next week";
         if(ceil(day_diff / 7) < 4) return 'in ' . ceil(day_diff / 7) . ' weeks";
@@ -167,7 +175,7 @@ static NSString *kSQLiteDateFormat = @"yyyy/MM/dd HH:mm:ss Z";
 					   @"yyyy-MM-dd HH:mm:ss K",
 					   @"yyyy-MM-dd HH:mm:ss ZZ",
 					   @"yyyy/MM/dd HH:mm:ss",
-                       @"yyyy-MM-dd HH:MM:SS zzz",
+                       @"yyyy-MM-dd HH:mm:ss zzz",
                        @"MMM dd, YYYY",
                        nil];
     }
@@ -200,6 +208,24 @@ static NSString *kSQLiteDateFormat = @"yyyy/MM/dd HH:mm:ss Z";
     [formatter setDateFormat:format];
     NSString *result = [formatter stringFromDate:date];
 	return result;
+}
+
+
+static NSDateFormatter *uploadDateFormatter = nil;
+
++ (NSDate*)formattedDate:(NSString*)dateString zone:(NSString*)zoneString {
+    
+    if(uploadDateFormatter == nil) {
+        uploadDateFormatter = [[NSDateFormatter alloc] init];
+    }
+    
+    [uploadDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:zoneString]];
+    [uploadDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] ];
+    [uploadDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate *formattedDate = [uploadDateFormatter dateFromString:dateString];
+    
+    return formattedDate;
 }
 
 

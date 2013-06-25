@@ -13,6 +13,8 @@
 @interface SettingsScreen : UIViewController<LoginScreenDelegate> {
     
     IBOutlet UIButton *loginButton;
+    IBOutlet UILabel *userNamelabel;
+    IBOutlet UILabel *queueCountLabel;
 }
 
 - (IBAction)loginOrLogout:(id)sender;

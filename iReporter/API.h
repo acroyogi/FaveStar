@@ -10,13 +10,16 @@
 #import "AFNetworking.h"
 #import "MBMNetworkActivity.h"
 
-//the web location of the service
-//#define kAPIHost @"http://api.favestar.net"
-#define kAPIHost @"http://api.favestar.net"
+//the web locations of the service
 
-//#define kAPIPath @"ios/"
+#define kAPIHost @"http://api.favestar.net"
 #define kAPIPath @"_api/"
-#define kAPIImgPath @"_imgbank/"
+#define kAPIVersion @"v0.30i"
+
+#define kAPIImageHost @"http://cimg.favestar.net"
+#define kAPIImgPath @"upload/"
+// #define kAPIImgPath @"_imgbank/"
+
 #define kAPIIconImgPath @"http://uimg.favestar.net/ui/icons/cats/numbers/"
 
 typedef void (^JSONResponseBlock)(NSDictionary* json);

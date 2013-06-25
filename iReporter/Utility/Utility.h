@@ -29,4 +29,7 @@
 + (NSString*)timeToString:(NSDate*)time;
 + (int)categoryIdByType:(id)sender;
 
++ (void)addHeaderLogo:(UINavigationController*)navController logo:(NSString*)logoName ;
++ (NSDate*)formattedDate:(NSString*)dateString zone:(NSString*)zoneString;
+
 @end

@@ -10,6 +10,7 @@
 
 #import "StreamPhotoScreen.h"
 #import "API.h"
+// #import "UIActivityViewController.h"
 
 #define kAPIIconImgPathX @"http://www.favestar.net/_img/ui/icons/cats/numbers/"
 
@@ -44,13 +45,14 @@
 
     NSString *date = [[data objectForKey:@"DATETIME_CREATE"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *zone = [[data objectForKey:@"TIMEZONE_CREATE"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    zone = ([zone hasPrefix:@"+"] == NO && [zone hasPrefix:@"-"] == NO) ? [NSString stringWithFormat:@"GMT+%@", zone ] : [NSString stringWithFormat:@"GMT%@", zone ];
-    
-    NSString *dateString = [NSString stringWithFormat:@"%@ %@", date, zone];
+    NSDate *createdDate = [Utility formattedDate:date zone:zone];
+
+//    zone = ([zone hasPrefix:@"+"] == NO && [zone hasPrefix:@"-"] == NO) ? [NSString stringWithFormat:@"+%@", zone ] : [NSString stringWithFormat:@"%@", zone ];    
+//    NSString *dateString = [NSString stringWithFormat:@"%@ %@", date, zone];
 
     self.IdPhoto = [NSNumber numberWithInt:[[data objectForKey:@"IdPhoto"] intValue]];
     lblTitle.text = [data objectForKey:@"title"];
-    lblDate.text = [Utility timeToString:[Utility dateFromString:dateString]]; // @"Yesterday";
+    lblDate.text = [Utility timeToString:createdDate]; // @"Yesterday";
     lblLocation.text = [data objectForKey:@"LOC_ID"];
     lblUserName.text = [NSString stringWithFormat:@"★%@", [data objectForKey:@"username"]];
     
@@ -111,6 +113,24 @@
     if(loadingView != nil) {
         [loadingView performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
     }
+}
+
+- (IBAction)gShare:(id)sender {
+    // - - - - - - - - - - -
+    // set up the dynamic string
+    NSDictionary *data = [self.dataList objectAtIndex:self.currentImageId];
+    NSString *funText = [NSString stringWithFormat:@"★%@ just shared a #FaveStar moment with you: %@ -- see it at http://mvp.favestar.net/stream/?fID=%@", [data objectForKey:@"username"], [data objectForKey:@"title"], [data objectForKey:@"IdPhoto"]];
+
+    // - - - - - - - - - - -
+    // share via Apple built-in pop-up action palette
+    NSString* someText = @"test"; // self.textView.text;
+    NSArray* dataToShare = @[funText];  // ...or whatever pieces of data you want to share.
+    
+    UIActivityViewController* activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                      applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:^{}];
+    // - - - - - - - - - - -
 }
 
 - (IBAction)closeView:(id)sender {

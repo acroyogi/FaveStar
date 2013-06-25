@@ -16,6 +16,8 @@
 
 + (NSArray*)allPendingUploadDataQueueObjectsInManagedObjectContext;
 
++ (int)pendingUploadDataQueueCount;
+
 // Insert a new object.
 + (UploadDataQueue *)insert:(NSMutableDictionary *)details;
 

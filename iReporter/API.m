@@ -83,14 +83,13 @@
 
 
 
-// this function creates the URL for a single image from the server
-
+// this function creates the URL to pull a single image from the server
 -(NSURL*)urlForImageWithId:(NSNumber*)IdPhoto isThumb:(BOOL)isThumb {
-    NSString* urlString = [NSString stringWithFormat:@"%@/%@upload/%@%@.jpg", kAPIHost, kAPIImgPath, IdPhoto, (isThumb)?@"_t":@"_m"];
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@/%@%@.jpg", kAPIImageHost, kAPIImgPath, IdPhoto, (isThumb)?@"_t":@"_m"];
     return [NSURL URLWithString:urlString];
 }
 
-// this function creates the URL for a category icon from the server
+// this function creates the URL to pull a category icon from the server
 -(NSURL*)urlForCatWithId:(NSString*)IdCat {
     NSString* urlString = [NSString stringWithFormat:@"%@%@.png", kAPIIconImgPath, IdCat];
     return [NSURL URLWithString:urlString];

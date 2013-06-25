@@ -50,6 +50,17 @@
     return objects;
 }
 
++ (int)pendingUploadDataQueueCount {
+    
+    NSManagedObjectContext *context = [APP_DELEGATE managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UploadDataQueue" inManagedObjectContext:context]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"detailsUploaded = %@ OR imageUploaded = %@", [NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
+    
+    return [[context executeFetchRequest:request error:nil] count];
+}
+
 // Insert a new object.
 + (UploadDataQueue *)insert:(NSMutableDictionary *)details {
     

@@ -55,6 +55,7 @@ NSString *gXdataType = @"gperson";
     
     [super viewDidLoad];
     
+    categoryTitleLabel.alpha = 0;
     self.loginViewDismissed = NO;
     self.favImageName = @"";
     
@@ -67,8 +68,7 @@ NSString *gXdataType = @"gperson";
     // Custom initialization
     //self.navigationItem.rightBarButtonItem = btnCamera;
     
-    self.navigationItem.title = @"Fave It";
-    
+    [Utility addHeaderLogo:self.navigationController logo:HeaderLogoImage];    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -405,8 +405,10 @@ NSString *gXdataType = @"gperson";
                                                
                                                if(self.delegate != nil) {
                                                    [self.delegate galleryDataDidChange];
-                                               }                                               
+                                               }
                                                
+                                           [self  performSelectorOnMainThread:@selector(cancelView) withObject:nil waitUntilDone:YES];
+                                           
                                            } else {
                                                //error, check for expired session and if so - authorize the user
                                                NSString* errorMsg = [json objectForKey:@"error"];
@@ -432,6 +434,11 @@ NSString *gXdataType = @"gperson";
         [self hideMessageView];
     }
     
+}
+
+- (void)cancelView {
+    NSLog(@"cancelView --");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)logout {
@@ -526,16 +533,31 @@ NSString *gXdataType = @"gperson";
         UIButton *catButton = (UIButton *)[self.view viewWithTag:i];
         NSString *imageName = [NSString stringWithFormat:@"fave-cat-%d%@-512.png", i, (catButton.tag == btn.tag) ?  @"": @"-50g"];
         [Utility setButtonImageForAllState:catButton image:imageName];
+        catButton.userInteractionEnabled = NO;
         
         if((catButton.tag != btn.tag)) {
-            catButton.userInteractionEnabled = NO;
             [Utility animateViewWithAlpha:0.0 duration:4 view:catButton];
         }
         else {
-            catButton.userInteractionEnabled = YES;
+            [self animateSelectedCatButton:btn];
         }
     }
     
+}
+
+- (void)animateSelectedCatButton:(UIButton*)btn {
+    
+    [btn removeFromSuperview];
+    btn.frame = CGRectMake(categoryView.frame.origin.x + btn.frame.origin.x, categoryView.frame.origin.y + btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height);
+    [self.view addSubview:btn];
+
+    CGRect frame = CGRectMake(5, messageView.frame.origin.y - 10, 40, 40);
+    
+    [UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:2.0];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[btn setFrame:frame];
+	[UIView commitAnimations];
 }
 
 - (void)updateInstructionText:(NSString*)category {
@@ -552,11 +574,13 @@ NSString *gXdataType = @"gperson";
 
 - (void)hideCategoryButtons {
     
+    [Utility animateViewWithAlpha:0.0 duration:1.0 view:categoryTitleLabel];
     [self showOrHideCategoryButtons:NO];
 }
 
 - (void)showCategoryButtons {
     
+    [Utility animateViewWithAlpha:0.699999988079071 duration:1.0 view:categoryTitleLabel];
     [self showOrHideCategoryButtons:YES];
 }
 

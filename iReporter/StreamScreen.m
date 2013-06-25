@@ -44,9 +44,13 @@
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(showSettingsView)];
+    
     [settingsButton setImage:[UIImage imageNamed:@"settings.png"]];
+    settingsButton.tintColor = btnCompose.tintColor;
     
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnCompose, settingsButton, nil]];
+    
+    [Utility addHeaderLogo:self.navigationController logo:HeaderLogoImage];
     
 	[self refreshStream]; //show the photo stream
 }

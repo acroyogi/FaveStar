@@ -52,6 +52,8 @@
 - (void)updateView {
     
     [Utility setButtonTitleAllState:loginButton text:(![[API sharedInstance] isAuthorized]) ? @"  Login" : @"  Logout"];
+    userNamelabel.text = ([[API sharedInstance] isAuthorized]) ? [NSString stringWithFormat:@"★%@", [[API sharedInstance].user objectForKey:@"username"]] : @"";    
+    queueCountLabel.text = [NSString stringWithFormat:@"%d", [UploadDataQueue pendingUploadDataQueueCount]];
 }
 
 - (IBAction)loginOrLogout:(id)sender {

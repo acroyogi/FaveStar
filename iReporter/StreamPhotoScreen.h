@@ -38,6 +38,7 @@
 @property int totalPhotoCount;
 @property int currentImageId;
 
+- (IBAction)gShare:(id)sender;
 - (IBAction)closeView:(id)sender;
 
 @end

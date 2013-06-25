@@ -21,6 +21,9 @@
     IBOutlet UITextField* fldTitle;
     IBOutlet UILabel *messageLabel;
     IBOutlet UIView *messageView;
+    IBOutlet UILabel *categoryTitleLabel;
+    IBOutlet UIImageView *selectedCategoryImageIcon;
+    IBOutlet UIView *categoryView;
     
     UIImage *favImage;
     NSString *favImageName;
