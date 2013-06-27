@@ -67,16 +67,17 @@
     scrollView.pagingEnabled = YES;
     
     CGFloat xPos = 0.0;
-    
+
     for (NSDictionary *imageDetails in self.dataList) {
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [imageView setClipsToBounds:YES];
         [scrollView addSubview:imageView];
-        xPos += self.view.frame.size.width;
         
         NSURL* imageURL = [[API sharedInstance] urlForImageWithId:[NSNumber numberWithInt:[[imageDetails objectForKey:@"IdPhoto"] intValue]] isThumb:NO];
         [imageView setImageWithURL: imageURL];
+        xPos += self.view.frame.size.width;
     }
 
 }
