@@ -47,6 +47,14 @@
 }
 
 
+- (NSString*)loggedInUserId {
+    
+    if(user != nil && [self isAuthorized] == YES) {
+        return [user objectForKey:@"IdUser"];
+    }
+    
+    return @"0";
+}
 
 
 // this function sends an API call to the server

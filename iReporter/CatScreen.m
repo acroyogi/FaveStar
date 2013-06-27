@@ -338,6 +338,7 @@ NSString *gXdataType = @"gperson";
         [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                                  dictionaryWithObjectsAndKeys:
                                                  @"fastimage", @"command",
+                                                 [[API sharedInstance] loggedInUserId], @"IdUser",
                                                  UIImageJPEGRepresentation(photo.image,70), @"file",
                                                  [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.latitude], @"lat",
                                                  [NSString stringWithFormat:@"%f", APP_DELEGATE.userLocation.coordinate.longitude], @"lon",
@@ -346,6 +347,7 @@ NSString *gXdataType = @"gperson";
                                                  zone, @"timezone",                                                 
                                                  nil]
                                    onCompletion:^(NSDictionary *json) {
+                                       
                                        //completion
                                        if (![json objectForKey:@"error"]) {
                                            
@@ -353,7 +355,7 @@ NSString *gXdataType = @"gperson";
                                            [self.uploadQueueObj setImageUploaded:[NSNumber numberWithInt:1]];
                                            [UploadDataQueue update:self.uploadQueueObj];
                                            
-                                           if([self.uploadQueueObj.catId intValue] != 0 && [self.uploadQueueObj.detailsUploaded  intValue] == 1) {
+                                           if([self.uploadQueueObj.catId intValue] != 0 && [self.uploadQueueObj.detailsUploaded  intValue] == 0) {
                                                [self uploadMetadata];
                                            }                                            
                                            
@@ -390,11 +392,13 @@ NSString *gXdataType = @"gperson";
             [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                                      dictionaryWithObjectsAndKeys:
                                                      @"fastmeta", @"command",
+                                                     [[API sharedInstance] loggedInUserId], @"IdUser",
                                                      self.favImageName, @"title",
                                                      [NSString stringWithFormat:@"%d", [self.uploadQueueObj.serverPhotoId intValue]], @"IdPhoto",
                                                      [NSString stringWithFormat:@"%d", self.selectedCatId], @"catID",
                                                      nil]
                                        onCompletion:^(NSDictionary *json) {
+                                           
                                            //completion
                                            if (![json objectForKey:@"error"]) {
                                                //success

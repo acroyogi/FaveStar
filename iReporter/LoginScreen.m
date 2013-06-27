@@ -65,6 +65,7 @@
 	[[API sharedInstance] commandWithParams:params onCompletion:^(NSDictionary *json) {
 		//result returned
 		NSDictionary* res = [[json objectForKey:@"result"] objectAtIndex:0];
+
 		if ([json objectForKey:@"error"]==nil && [[res objectForKey:@"IdUser"] intValue]>0) {
 			
             [[API sharedInstance] setUser: res];

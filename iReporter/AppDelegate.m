@@ -338,6 +338,7 @@
         [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                                  dictionaryWithObjectsAndKeys:
                                                  @"fastimage", @"command",
+                                                 [[API sharedInstance] loggedInUserId], @"IdUser",
                                                  obj.image, @"file",
                                                  obj.lat, @"lat",
                                                  obj.lon, @"lon",
@@ -374,9 +375,10 @@
             [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                                      dictionaryWithObjectsAndKeys:
                                                      @"fastmeta", @"command",
+                                                     [[API sharedInstance] loggedInUserId], @"IdUser",
                                                      obj.faveTitle, @"title",
                                                      [NSString stringWithFormat:@"%d", [obj.serverPhotoId intValue]], @"IdPhoto",
-                                                     [NSString stringWithFormat:@"%d", [obj.catId intValue]], @"catID",
+                                                     [NSString stringWithFormat:@"%d", [obj.catId intValue]], @"catID",                                                     
                                                      nil]
                                        onCompletion:^(NSDictionary *json) {
                                            //completion

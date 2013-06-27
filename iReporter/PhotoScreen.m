@@ -189,6 +189,7 @@ NSString *gdataType = @"gperson";
     [[API sharedInstance] commandWithParams:[NSMutableDictionary
                                              dictionaryWithObjectsAndKeys:
                                              gdataType, @"command",
+                                             [[API sharedInstance] loggedInUserId], @"IdUser",
                                              UIImageJPEGRepresentation(photo.image,70), @"file",
                                              fldTitle.text, @"title",
                                              nil]

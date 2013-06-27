@@ -13,7 +13,8 @@
 //the web locations of the service
 
 #define kAPIHost @"http://api.favestar.net"
-#define kAPIPath @"_api/"
+//#define kAPIPath @"_api/"
+#define kAPIPath @"_api/142/"
 #define kAPIVersion @"v0.30i"
 
 #define kAPIImageHost @"http://cimg.favestar.net"
@@ -36,5 +37,7 @@ typedef void (^JSONResponseBlock)(NSDictionary* json);
 -(NSURL*)urlForImageWithId:(NSNumber*)IdPhoto isThumb:(BOOL)isThumb;
 //-(NSURL*)urlForCatWithId:(NSInteger*)IdCat;
 -(NSURL*)urlForCatWithId:(NSString*)IdCat;
+
+- (NSString*)loggedInUserId;
 
 @end
