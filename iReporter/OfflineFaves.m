@@ -8,6 +8,8 @@
 
 #import "OfflineFaves.h"
 
+#define CellHeight 69.0
+
 @interface OfflineFaves ()
 
 @end
@@ -52,7 +54,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 64;
+    return CellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,9 +74,9 @@
     cell.faveNameLabel.font = [UIFont systemFontOfSize:13];
     
     cell.uploadButton.tag = indexPath.row;
-    [cell.uploadButton addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchDown];
     
     cell.faveImageView.image = [UIImage imageWithData:data.image];
+    cell.delegate = self;
     
     return cell;
 }
@@ -83,34 +85,37 @@
     
 
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return [self footerHeight];
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return  [[UIView alloc ] init];
-}
-
-/*
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationLandscapeRight;
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        return YES;
-    }
-    return NO;
+    UIImageView *fView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gradient.png"]];
+    fView.frame = CGRectMake(0, 0, self.view.bounds.size.width, [self footerHeight]);
+    
+    return  fView;
 }
- */
 
-- (void)upload:(id)sender {
+- (float)footerHeight {
     
-    UIButton *btn = (UIButton*)sender;
+    return ([self.offlineFaves count] > 4) ? 0 : ((4 - [self.offlineFaves count]) * CellHeight);
+}
+
+#pragma mark - OfflineFaveDelegate
+
+
+- (void)deleteOfflineFaveItem:(int)itemIndex {
     
-    UploadDataQueue *obj = [self.offlineFaves objectAtIndex:btn.tag];
+    UploadDataQueue *obj = [self.offlineFaves objectAtIndex:itemIndex];
+    [UploadDataQueue deleteUploadDataQueue:obj];
+    
+    [self refreshViewWithData];
+}
+
+- (void)uploadOfflineFaveData:(int)itemIndex {
+    
+    UploadDataQueue *obj = [self.offlineFaves objectAtIndex:itemIndex];
     
     if([obj.imageUploaded boolValue] == NO && [obj.serverPhotoId intValue] == 0) {
         [self initialImageUpload:obj];
@@ -119,6 +124,8 @@
         [self uploadMetadata:obj];
     }
 }
+
+
 
 - (void)initialImageUpload:(UploadDataQueue*)obj {
 
@@ -164,6 +171,7 @@
     }
     else {
         [UIAlertView error:@"No network"];
+        [self cancel:nil];
     }
     
     
@@ -210,13 +218,13 @@
         }
         else {
            [UIAlertView error:@"No network"];
+            [self cancel:nil];
         }
     }
     
 }
 
 - (void)refreshViewWithData {
-    
     self.offlineFaves = [UploadDataQueue allPendingUploadDataQueueObjectsInManagedObjectContext];
     [listTableView reloadData];
 }

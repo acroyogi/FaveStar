@@ -443,7 +443,7 @@
                                     <action selector="showOfflineFaves:" destination="WzH-yZ-Kr2" eventType="touchUpInside" id="fDE-bU-6tr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="FaveStar iOS — v1.40 — 2013-06-27" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vdk-YH-zKq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="FaveStar iOS — v1.42 — 2013-07-04" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vdk-YH-zKq">
                                 <rect key="frame" x="286" y="137" width="184" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -528,9 +528,10 @@
                                 <color key="tintColor" red="0.93725496529999996" green="0.50196081400000003" blue="0.13725490870000001" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cr7-yK-64C">
-                                <rect key="frame" x="0.0" y="44" width="480" height="255"/>
+                                <rect key="frame" x="0.0" y="44" width="480" height="257"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.91764712329999998" green="0.86274516580000005" blue="0.68627452850000004" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="QLs-cI-nDu" id="hPL-yK-kJp"/>
                                     <outlet property="delegate" destination="QLs-cI-nDu" id="o7B-3f-sdZ"/>
@@ -545,7 +546,7 @@
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.91764712329999998" green="0.86274516580000005" blue="0.68627452850000004" alpha="1" colorSpace="deviceRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -575,15 +576,15 @@
                                 <rect key="frame" x="150" y="38" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="bottomLeft" text="  categorize your fave:" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="x4e-ko-p8K">
-                                <rect key="frame" x="0.0" y="41" width="480" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="bottomLeft" text="  categorize your fave:" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="x4e-ko-p8K">
+                                <rect key="frame" x="0.0" y="40" width="480" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.42999999999999999" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="bottomLeft" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="fyM-CO-CjE">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="bottomLeft" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="fyM-CO-CjE">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.42999999999999999" colorSpace="calibratedRGB"/>
@@ -592,7 +593,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name this fave..." minimumFontSize="16" clearButtonMode="whileEditing" id="Hcq-1J-ilo">
-                                <rect key="frame" x="10" y="7" width="460" height="29"/>
+                                <rect key="frame" x="12" y="7" width="460" height="29"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -741,15 +742,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RVL-js-4QW">
-                                        <rect key="frame" x="73" y="0.0" width="609" height="30"/>
+                                        <rect key="frame" x="81" y="0.0" width="609" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="EPY-Jt-bTW">
-                                        <rect key="frame" x="44" y="5" width="20" height="20"/>
+                                        <rect key="frame" x="52" y="5" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -824,7 +825,6 @@
         <class className="CatScreen" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CatScreen.h"/>
             <relationships>
-                <relationship kind="action" name="btnActionTapped:"/>
                 <relationship kind="action" name="btnCameraTapped:"/>
                 <relationship kind="action" name="btnCatEventTapped:"/>
                 <relationship kind="action" name="btnCatIdeaTapped:"/>
@@ -913,6 +913,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="gNo-A0-RN4"/>
-        <segue reference="tQU-Sq-zKP"/>
+        <segue reference="D6c-6D-wv8"/>
     </inferredMetricsTieBreakers>
 </document>

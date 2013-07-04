@@ -12,7 +12,7 @@
 #import "Utility.h"
 #import "UIAlertView+error.h"
 
-@interface OfflineFaves : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+@interface OfflineFaves : UIViewController<UITableViewDataSource, UITableViewDelegate, OfflineFaveDelegate> {
     
     NSArray *offlineFaves;
     

@@ -67,6 +67,7 @@
 		C41DDA591767521A00A0BB6B /* OfflineFaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C41DDA561767521A00A0BB6B /* OfflineFaveCell.m */; };
 		C41DDA5A1767521A00A0BB6B /* OfflineFaveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41DDA571767521A00A0BB6B /* OfflineFaveCell.xib */; };
 		C42F777C177178B0006AA033 /* UploadDataQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C42F777B177178B0006AA033 /* UploadDataQueue.m */; };
+		C4543530178571E60095C00B /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = C454352F178571E60095C00B /* gradient.png */; };
 		C470BD9E1779991900A62E82 /* favestar_logotype_30h.png in Resources */ = {isa = PBXBuildFile; fileRef = C470BD9C1779991900A62E82 /* favestar_logotype_30h.png */; };
 		C470BD9F1779991900A62E82 /* favestar_logotype_30h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C470BD9D1779991900A62E82 /* favestar_logotype_30h@2x.png */; };
 		C4B27EFF1765B3ED0013ADAF /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B27EFE1765B3ED0013ADAF /* settings@2x.png */; };
@@ -202,6 +203,7 @@
 		C41DDA581767521A00A0BB6B /* OfflineFaveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineFaveCell.h; sourceTree = "<group>"; };
 		C42F777A177178B0006AA033 /* UploadDataQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadDataQueue.h; sourceTree = "<group>"; };
 		C42F777B177178B0006AA033 /* UploadDataQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDataQueue.m; sourceTree = "<group>"; };
+		C454352F178571E60095C00B /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
 		C470BD9C1779991900A62E82 /* favestar_logotype_30h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favestar_logotype_30h.png; sourceTree = "<group>"; };
 		C470BD9D1779991900A62E82 /* favestar_logotype_30h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favestar_logotype_30h@2x.png"; sourceTree = "<group>"; };
 		C4B27EFD1765AB4E0013ADAF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 		FA5FBBE51751B48A00309D4D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C454352F178571E60095C00B /* gradient.png */,
 				C470BD9C1779991900A62E82 /* favestar_logotype_30h.png */,
 				C470BD9D1779991900A62E82 /* favestar_logotype_30h@2x.png */,
 				FAB816F417790238005A2427 /* icon_close_50.png */,
@@ -643,6 +646,7 @@
 				FAB816F517790238005A2427 /* icon_close_50.png in Resources */,
 				C470BD9E1779991900A62E82 /* favestar_logotype_30h.png in Resources */,
 				C470BD9F1779991900A62E82 /* favestar_logotype_30h@2x.png in Resources */,
+				C4543530178571E60095C00B /* gradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

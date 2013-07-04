@@ -31,5 +31,6 @@
 
 + (void)addHeaderLogo:(UINavigationController*)navController logo:(NSString*)logoName ;
 + (NSDate*)formattedDate:(NSString*)dateString zone:(NSString*)zoneString;
++ (UIImage *) imageFromColor:(UIColor *)color;
 
 @end
