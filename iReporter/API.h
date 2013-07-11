@@ -14,8 +14,8 @@
 
 #define kAPIHost @"http://api.favestar.net"
 //#define kAPIPath @"_api/"
-#define kAPIPath @"_api/142/"
-#define kAPIVersion @"v0.30i"
+#define kAPIPath @"_api/150/"
+#define kAPIVersion @"v1.50i"
 
 #define kAPIImageHost @"http://cimg.favestar.net"
 #define kAPIImgPath @"upload/"

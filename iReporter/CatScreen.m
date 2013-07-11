@@ -59,6 +59,7 @@ NSString *gXdataType = @"gperson";
     self.loginViewDismissed = NO;
     self.favImageName = @"";
     
+    [self modifyImage];
     [self updateViewWithDetails];
     
     if(self.favImageName == nil) {
@@ -90,28 +91,57 @@ NSString *gXdataType = @"gperson";
 - (void)updateViewWithDetails {
     
     if(self.favImage != nil) {        
-        photo.image = [self modifiedImage];        
+        photo.image = self.favImage;
     }
     
     fldTitle.text = (self.favImageName != nil) ? self.favImageName : @"";
 }
 
+- (void)modifyImage {
 
-- (UIImage*)modifiedImage {
+    UIImage *scaledImage, *croppedImage, *duplicateScaledImage, *duplicateCroppedImage;
+    /*
+     1) rescale a copy of the image to height of 1920
+     2) center crop that copy to 9:16 vertical. i.e. 1080 w x 1920h (A)
+     3) rescale the original to width of 1920
+     4) crop the rescaled original to a horizontal subregion at 1920 w x1080 h,
+     with the bottom left coordinate of the crop zone equating to x=0, y=h/2
+     so that the crop subsamples the UPPER HALF of the source image (B)
+     */
+    //Portrait
+    if (self.favImage.size.height > self.favImage.size.width) {
+        //copy modified        
+        duplicateScaledImage = [self.favImage                                
+                                resizedImageWithContentMode:UIViewContentModeScaleAspectFill                                
+                                bounds:CGSizeMake(1080, 1920)                                
+                                interpolationQuality:kCGInterpolationHigh];
+        
+        duplicateCroppedImage = [duplicateScaledImage                                 
+                                 croppedImage:CGRectMake(((duplicateScaledImage.size.width - 1080) > 0 ? (duplicateScaledImage.size.width - 1080)/2 : 0), 0,  1080, 1920)];
+        UIImageWriteToSavedPhotosAlbum(duplicateCroppedImage, nil, nil, nil);
+        
+        // original image modified
+        scaledImage = [self.favImage                       
+                       resizedImageWithContentMode:UIViewContentModeScaleAspectFill                       
+                       bounds:CGSizeMake(1920, 1080)                       
+                       interpolationQuality:kCGInterpolationHigh];
+        
+        croppedImage = [scaledImage                        
+                        croppedImage:CGRectMake(0, ((scaledImage.size.height/2 - 1080) > 0 ? (scaledImage.size.height/2 - 1080) : 0), 1920, 1080)];
+        UIImageWriteToSavedPhotosAlbum(croppedImage, nil, nil, nil);
+    }
+    else {//Landscape
+        
+        scaledImage = [self.favImage                       
+                       resizedImageWithContentMode:UIViewContentModeScaleAspectFill                       
+                       bounds:CGSizeMake(1920, 1080)                       
+                       interpolationQuality:kCGInterpolationHigh];       
+                
+        croppedImage = [scaledImage                        
+                        croppedImage:CGRectMake(0,  (scaledImage.size.height - 1080)/2, 1920, 1080)];        
+    }
     
-    UIImage *scaledImage = [self.favImage
-                            resizedImageWithContentMode:UIViewContentModeScaleAspectFill
-                            bounds:CGSizeMake(1920, 1080)
-                            interpolationQuality:kCGInterpolationHigh];
-    
-    UIImage *croppedImage = [scaledImage
-                             croppedImage:CGRectMake(0,
-                                                     (scaledImage.size.height - 1080)/2,
-                                                     1920, 1080)];
-    
-    self.favImage = croppedImage;
-    
-    return self.favImage;
+    self.favImage = croppedImage;    
 }
 
 #pragma mark - buttons
@@ -490,8 +520,9 @@ NSString *gXdataType = @"gperson";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
 	UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    photo.image = [self modifiedImage];
+    self.favImage = image;
+    [self modifyImage];
+    photo.image = self.favImage;
     
     /*
      // Resize the image from the camera

@@ -10,11 +10,13 @@
 #import "PhotoView.h"
 #import "GalleryDataDelegate.h"
 #import "Utility.h"
+#import "PullToRefreshScrollView.h"
 
-@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GalleryDataDelegate> {
+@interface StreamScreen : UIViewController <PhotoViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GalleryDataDelegate, PullToRefreshScrollViewDelegate> {
     IBOutlet UIBarButtonItem* btnCompose;
     IBOutlet UIBarButtonItem* btnRefresh;
-    IBOutlet UIScrollView* listView;
+    IBOutlet PullToRefreshScrollView* listView;
+    IBOutlet UIButton *cameraButton;
     
     UIImagePickerController *imagePicker;
     UIAlertView *inputAlert;

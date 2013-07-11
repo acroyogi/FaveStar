@@ -59,26 +59,47 @@
 		return;
 	}
 	//check whether it's a login or register
-	NSString* command = (sender.tag==1)?@"register":@"login";
-	NSMutableDictionary* params =[NSMutableDictionary dictionaryWithObjectsAndKeys:command, @"command", fldUsername.text, @"username", hashedPassword, @"password", nil];
+    if (sender.tag==1) {
+        NSString* command = @"gregister";
+        NSMutableDictionary* params =[NSMutableDictionary dictionaryWithObjectsAndKeys:command, @"command", fldUsername.text, @"username", fldPassword.text, @"clearpass", hashedPassword, @"hashpass", nil];
+        [[API sharedInstance] commandWithParams:params onCompletion:^(NSDictionary *json) {
+            //result returned
+            NSDictionary* res = [[json objectForKey:@"result"] objectAtIndex:0];
+            if ([json objectForKey:@"error"]==nil && [[res objectForKey:@"IdUser"] intValue]>0) {
+                
+                [[API sharedInstance] setUser: res];
+                [Utility syncDefaults:kLoggedInUserDetails dataToSync:res];
+                
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                //show message to the user
+                [[[UIAlertView alloc] initWithTitle:@"Logged in" message:[NSString stringWithFormat:@"Welcome, %@!",[res objectForKey:@"username"]] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
+            } else {
+                //error
+                [UIAlertView error:[json objectForKey:@"error"]];
+            }
+        }];
+    } else {
+        NSString* command = @"login";
+        NSMutableDictionary* params =[NSMutableDictionary dictionaryWithObjectsAndKeys:command, @"command", fldUsername.text, @"username", hashedPassword, @"password", nil];
+        [[API sharedInstance] commandWithParams:params onCompletion:^(NSDictionary *json) {
+            //result returned
+            NSDictionary* res = [[json objectForKey:@"result"] objectAtIndex:0];
+            if ([json objectForKey:@"error"]==nil && [[res objectForKey:@"IdUser"] intValue]>0) {
+                
+                [[API sharedInstance] setUser: res];
+                [Utility syncDefaults:kLoggedInUserDetails dataToSync:res];
+                
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                //show message to the user
+                [[[UIAlertView alloc] initWithTitle:@"Logged in" message:[NSString stringWithFormat:@"Welcome back, %@!",[res objectForKey:@"username"]] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
+            } else {
+                //error
+                [UIAlertView error:[json objectForKey:@"error"]];
+            }
+        }];
+    }
+    
 	//make the call to the web API
-	[[API sharedInstance] commandWithParams:params onCompletion:^(NSDictionary *json) {
-		//result returned
-		NSDictionary* res = [[json objectForKey:@"result"] objectAtIndex:0];
-
-		if ([json objectForKey:@"error"]==nil && [[res objectForKey:@"IdUser"] intValue]>0) {
-			
-            [[API sharedInstance] setUser: res];
-            [Utility syncDefaults:kLoggedInUserDetails dataToSync:res];
-            
-			[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-			//show message to the user
-			[[[UIAlertView alloc] initWithTitle:@"Logged in" message:[NSString stringWithFormat:@"Welcome back, %@!",[res objectForKey:@"username"]] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] show];
-		} else {
-			//error
-			[UIAlertView error:[json objectForKey:@"error"]];
-		}
-	}];
 
 }
 

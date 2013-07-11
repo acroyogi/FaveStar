@@ -35,9 +35,10 @@
     [super viewDidLoad];
     
     self.streamList = [NSArray array];
+    listView.refreshDelegate = self;
     
     self.navigationItem.title = @"FaveStar";
-    self.navigationItem.leftBarButtonItem = btnRefresh;
+    [self hideCameraButton];
 
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@""
@@ -48,10 +49,12 @@
     [settingsButton setImage:[UIImage imageNamed:@"settings.png"]];
     settingsButton.tintColor = btnCompose.tintColor;
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnCompose, settingsButton, nil]];
+    [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:btnRefresh, settingsButton, nil]];
     
     [Utility addHeaderLogo:self.navigationController logo:HeaderLogoImage];
+    [APP_DELEGATE.window addSubview:cameraButton];
     
+    [listView showLoading];
 	[self refreshStream]; //show the photo stream
 }
 
@@ -59,11 +62,32 @@
     
     [super viewDidAppear:animated];
     
+    [self addCameraButton];
+    
     if ([[API sharedInstance] isAuthorized] && self.isInitialLoadDone == NO) {
         
         self.isInitialLoadDone = YES;
         [self showCameraView];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    [self hideCameraButton];
+}
+
+- (void)addCameraButton {
+    
+    cameraButton.frame = CGRectMake((self.view.bounds.size.height - (cameraButton.frame.size.width - 30)), (self.view.bounds.size.width - (cameraButton.frame.size.height)), cameraButton.frame.size.width, cameraButton.frame.size.height);
+    [APP_DELEGATE.window addSubview:cameraButton];
+    [Utility animateViewWithAlpha:1 duration:1 view:cameraButton];
+}
+
+- (void)hideCameraButton {
+    
+    [cameraButton removeFromSuperview];
+    [Utility animateViewWithAlpha:0 duration:0 view:cameraButton];
 }
 
 -(IBAction)btnRefreshTapped {
@@ -79,6 +103,7 @@
         //just call the "stream" command from the web API
         [[API sharedInstance] commandWithParams:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"stream", @"command", nil] onCompletion:^(NSDictionary *json) {
             //got stream
+            [listView stopLoading];
             self.streamList = ([json objectForKey:@"result"] != nil) ? [json objectForKey:@"result"] : self.streamList;
             self.totalStreamCount = (self.streamList != nil) ? [self.streamList count] : 0;
             [self showStream:self.streamList];
@@ -88,6 +113,7 @@
     }
     else {
         [self loadFavesFromDevice];
+        [listView stopLoading];
     }
 }
 
@@ -101,7 +127,9 @@
 -(void)showStream:(NSArray*)stream {
     // 1 remove old photos
     for (UIView* view in listView.subviews) {
-        [view removeFromSuperview];
+        if(view.tag != RefreshHeaderViewTag) {
+            [view removeFromSuperview];
+        }
     }
     // 2 add new photo views
     for (int i=0;i<[stream count];i++) {
@@ -137,11 +165,6 @@
         catScreen.favImageName = self.favName;
         catScreen.delegate = self;
     }
-}
-
-- (void)galleryDataDidChange {
-    
-    [self refreshStream];
 }
 
 - (IBAction)showCameraView {
@@ -193,6 +216,20 @@
         return YES;
     }
     return NO;
+}
+
+#pragma mark - GalleryDataDelegate
+
+- (void)galleryDataDidChange {
+    
+    [self refreshStream];
+}
+
+#pragma mark - PullToRefreshScrollViewDelegate
+
+-(void)refreshScrollView {
+    
+    [self refreshStream];
 }
 
 @end
