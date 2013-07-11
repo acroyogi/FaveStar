@@ -128,7 +128,7 @@ NSString *gXdataType = @"gperson";
         
         croppedImage = [scaledImage                        
                         croppedImage:CGRectMake(0, ((scaledImage.size.height/2 - 1080) > 0 ? (scaledImage.size.height/2 - 1080) : 0), 1920, 1080)];
-        UIImageWriteToSavedPhotosAlbum(croppedImage, nil, nil, nil);
+//        UIImageWriteToSavedPhotosAlbum(croppedImage, nil, nil, nil);
     }
     else {//Landscape
         
